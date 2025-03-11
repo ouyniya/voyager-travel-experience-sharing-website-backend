@@ -5,4 +5,4 @@ const aiRoute = express.Router();
 aiRoute.post('/chat', aiChat);
 aiRoute.get('/', aiPage);
 
-module.exports = aiRoute;
+module.exports = aiRoute
