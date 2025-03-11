@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// เพิ่ม DATABASE_URL ใน .env
+// DATABASE_URL="mysql://root:25@localhost:3306/cc19-pantip_testme"
+// mysql://: ระบุว่าใช้ MySQL เป็นโปรโตคอลการเชื่อมต่อ
+// root: ชื่อผู้ใช้ (username) สำหรับเชื่อมต่อกับฐานข้อมูล ในที่นี้คือ root ซึ่งเป็นผู้ใช้เริ่มต้นใน MySQL
+// 25: รหัสผ่าน (password) สำหรับผู้ใช้ root ในฐานข้อมูล ในที่นี้ใช้ 25 เป็นรหัสผ่าน
+// localhost: โฮสต์ (host) หรือที่อยู่ของเซิร์ฟเวอร์ฐานข้อมูล ในที่นี้คือ localhost ซึ่งหมายถึงการเชื่อมต่อกับฐานข้อมูลในเครื่องที่รันแอปพลิเคชัน (เซิร์ฟเวอร์ฐานข้อมูลอยู่ในเครื่องเดียวกัน)
+// 3306: พอร์ต (port) สำหรับเชื่อมต่อ MySQL ซึ่งพอร์ตเริ่มต้นของ MySQL คือ 3306
+// cc19-pantip_testme: ชื่อฐานข้อมูล (database name) ที่ต้องการเชื่อมต่อ ในที่นี้คือ cc19-pantip_testme
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  username     String?
+  email        String     @unique
+  password     String
+  role         Role       @default(USER) // Default role is USER
+  profileImage String?
+  createdAt    DateTime   @default(now())
+  posts        Post[]
+  comments     Comment[]
+  wishlists    Wishlist[]
+}
+
+model Province {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  districts District[]
+  places    Place[]
+}
+
+model District {
+  id         Int      @id @default(autoincrement())
+  name       String
+  province   Province @relation(fields: [provinceId], references: [id])
+  provinceId Int
+  places     Place[]
+}
+
+model Place {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?  @db.Text
+  latitude    Float?
+  longitude   Float?
+  province    Province @relation(fields: [provinceId], references: [id])
+  provinceId  Int
+  district    District @relation(fields: [districtId], references: [id])
+  districtId  Int
+  createdAt   DateTime @default(now())
+  posts       Post[]
+}
+
+model Post {
+  id        Int         @id @default(autoincrement())
+  user      User        @relation(fields: [userId], references: [id])
+  userId    Int
+  place     Place?      @relation(fields: [placeId], references: [id])
+  placeId   Int?
+  title     String      @db.Text
+  content   String      @db.Text
+  budget    Float
+  view      Int         @default(0)
+  createdAt DateTime    @default(now())
+  images    PostImage[]
+  comments  Comment[]
+  wishlists Wishlist[]
+}
+
+model PostImage {
+  id     Int    @id @default(autoincrement())
+  post   Post   @relation(fields: [postId], references: [id])
+  postId Int
+  url    String
+}
+
+model Wishlist {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  createdAt DateTime @default(now())
+}
+
+model Comment {
+  id        Int       @id @default(autoincrement())
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
+  parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id])
+  parentId  Int?
+  children  Comment[] @relation("CommentToComment")
+  content   String    @db.Text
+  createdAt DateTime  @default(now())
+}
