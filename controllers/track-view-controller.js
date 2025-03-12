@@ -1,9 +1,10 @@
+const prisma = require("../configs/prisma");
 const createError = require("../utils/createError");
 
 const trackViewController = {};
 
 trackViewController.trackView = async (req, res, next) => {
-  const { token, postId } = req.body;
+  const { postId, token } = req.body;
 
   try {
     // validate
@@ -19,7 +20,7 @@ trackViewController.trackView = async (req, res, next) => {
       return createError(400, "Post id should be number");
     }
 
-    if (typeof token === "string") {
+    if (typeof token !== "string") {
       return createError(400, "Token should be string");
     }
 
@@ -66,6 +67,14 @@ trackViewController.getAllTrackViews = (req, res, next) => {
 trackViewController.getTrackViewsByPostId = (req, res, next) => {
   try {
     res.json({ message: "getTrackViewsByPostId successful" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+trackViewController.getTrackViewsByPlaceId = (req, res, next) => {
+  try {
+    res.json({ message: "getTrackViewsByPlaceId successful" });
   } catch (error) {
     next(error);
   }
