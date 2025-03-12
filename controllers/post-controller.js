@@ -21,10 +21,6 @@ postController.createPost = async (req, res, next) => {
                 return result
             })
         )
-        // console.log("images")
-        // console.log(images)
-        // console.log("imagesUrl")
-        console.log(imagesUrl[0].secure_url)
 
         /* mock */
         const userId = 5 /* req.user.id */
