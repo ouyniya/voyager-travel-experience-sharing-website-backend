@@ -7,6 +7,7 @@ const commentRoute = require("./routes/comment-route");
 const handleErrors = require("./middlewares/error");
 const notFound = require("./middlewares/not-found");
 const aiRoute = require("./routes/ai-route");
+const trackViewRoute = require("./routes/track-view-route");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(morgan("dev"));
 app.use("/api/auth", authRoute);
 app.use("/api/ai", aiRoute);
 app.use("/api/comments", commentRoute);
+app.use("/api/track-view", trackViewRoute);
 
 // error middlewares
 app.use(handleErrors);
