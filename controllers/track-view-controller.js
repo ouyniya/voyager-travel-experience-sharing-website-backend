@@ -56,17 +56,52 @@ trackViewController.trackView = async (req, res, next) => {
   }
 };
 
-trackViewController.getAllTrackViews = (req, res, next) => {
+trackViewController.getAllTrackViews = async (req, res, next) => {
   try {
-    res.json({ message: "getAllTrackViews successful" });
+    // sum total view from db
+    const trackViews = await prisma.view.groupBy({
+      _sum: {
+        views: true,
+      },
+    });
+
+    if (!trackViews) {
+      return createError(400, "No track views recorded");
+    }
+
+    // response
+    res.json(trackViews);
   } catch (error) {
     next(error);
   }
 };
 
-trackViewController.getTrackViewsByPostId = (req, res, next) => {
+trackViewController.getTrackViewsByPostId = async (req, res, next) => {
   try {
-    res.json({ message: "getTrackViewsByPostId successful" });
+    // sum track view from db
+    const trackViews = await prisma.view.groupBy({
+      by: ["postId"],
+      _sum: {
+        views: true,
+      },
+    });
+
+    if (!trackViews) {
+      return createError(400, "No track views recorded");
+    }
+
+    // format
+    // postId, totalView
+    let trackViewData = [];
+    trackViews.forEach((trackView) => {
+      trackViewData.push({
+        postId: trackView.postId,
+        views: trackView._sum.views,
+      });
+    });
+
+    // response
+    res.json(trackViewData);
   } catch (error) {
     next(error);
   }
