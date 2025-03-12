@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const authRoute = require("./routes/auth-route");
+const postRoute = require("./routes/post-route");
 const commentRoute = require("./routes/comment-route");
 const handleErrors = require("./middlewares/error");
 const notFound = require("./middlewares/not-found");
@@ -18,6 +19,7 @@ app.use(morgan("dev"));
 
 // Routes
 app.use("/api/auth", authRoute);
+app.use("/api/posts", postRoute)
 app.use("/api/ai", aiRoute);
 app.use("/api/comments", commentRoute);
 app.use("/api/track-view", trackViewRoute);
