@@ -1,20 +1,21 @@
 const { z } = require("zod");
 
-// exports.registerSchema = z
-//   .object({
-//     username: z.string().min(3, "username should be at least 3 characters"),
-//     email: z.string().email("Email is not valid"),    
-//     password: z.string().min(6, "Password should be at least 6 characters"),    
-//   })
-//   .refine((data) => data.password === data.confirmPassword, {
-//     message: "Confirm Password ไม่ตรงกัน",
-//     path: ["confirmPassword"],
-//   });
+exports.registerSchema = z
+  .object({
+    email: z.string().email({ message: "Email is invalid" }).nonempty({ message: "Email is required" }),
+    username: z.string().optional(),
+    password: z.string().min(6, { message: "Password should be at least 6 characters" }).nonempty({ message: "Password is required" }),
+    confirmPassword: z.string().min(6, { message: "Password should be at least 6 characters" }).nonempty({ message: "Confirm Password is required" }),
+   })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Password not match",
+    path: ["confirmPassword"],
+  });
 
-// exports.loginSchema = z.object({
-//   email: z.string().email("Email ไม่ถูกต้อง"),
-//   password: z.string().min(6, "Password ต้องมากกว่า 6 อักขระ"),
-// });
+exports.loginSchema = z.object({
+  email: z.string().email("invalid email"),
+  password: z.string().min(6, "password should be at least 6 characters"),
+});
 
 exports.commentSchema = z.object({
   postId: z.number().int().nonnegative(),
