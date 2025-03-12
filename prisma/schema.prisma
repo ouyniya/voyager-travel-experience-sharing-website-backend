@@ -83,6 +83,7 @@ model Post {
   images    PostImage[]
   comments  Comment[]
   wishlists Wishlist[]
+  View      View[]
 }
 
 model PostImage {
@@ -112,4 +113,14 @@ model Comment {
   children  Comment[] @relation("CommentToComment")
   content   String    @db.Text
   createdAt DateTime  @default(now())
+}
+
+model View {
+  id        Int      @id @default(autoincrement())
+  token     String // token ของผู้ใช้
+  postId    Int // page ที่ผู้ใช้ดู
+  views     Int      @default(1) // จำนวน view ของ page
+  createdAt DateTime @default(now())
+
+  post Post @relation(fields: [postId], references: [id])
 }
