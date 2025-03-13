@@ -9,6 +9,7 @@ const handleErrors = require("./middlewares/error");
 const notFound = require("./middlewares/not-found");
 const aiRoute = require("./routes/ai-route");
 const trackViewRoute = require("./routes/track-view-route");
+const adminRoute = require("./routes/admin-route")
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use("/api/posts", postRoute)
 app.use("/api/ai", aiRoute);
 app.use("/api/comments", commentRoute);
 app.use("/api/track-view", trackViewRoute);
+app.use("/api/admin", adminRoute);
 
 // error middlewares
 app.use(handleErrors);

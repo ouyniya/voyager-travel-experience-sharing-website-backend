@@ -5,6 +5,7 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY; // ✅ Use API Key from .env
 
 const aiChat = async (req, res, next) => {
   try {
+
     const { budget, period, beginningPoint, region, transportation, numberOfTravellers, tripType, moodAndTone } = req.body;
 
     console.log("User Input:", { budget, period, beginningPoint, region, transportation, numberOfTravellers, tripType, moodAndTone });
@@ -97,6 +98,7 @@ const aiChat = async (req, res, next) => {
 
 // ✅ Home page for AI Section
 const aiPage = (req, res) => {
+
   res.send("Welcome to AI Section!");
 };
 
