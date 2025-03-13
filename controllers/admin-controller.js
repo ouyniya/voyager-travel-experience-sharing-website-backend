@@ -8,9 +8,9 @@ const adminController = {}
 adminController.listUsers = async (req, res, next) => {
     try {
 
-        // if (req.user.role !== "ADMIN") {
-        //     return createError(403, "Access denied. Admins only.");
-        //   }
+        if (req.user.role !== "ADMIN") {
+            return createError(403, "Access denied. Admins only.");
+          }
 
         const users = await prisma.user.findMany({
             omit: {
@@ -28,9 +28,9 @@ adminController.listUsers = async (req, res, next) => {
 adminController.updateRole = async (req, res, next) => {
     try {
         // Check if the requester is an ADMIN
-        // if (req.user.role !== "ADMIN") {
-        //     return res.status(403).json({ error: "Access denied. Admins only." });
-        // }
+        if (req.user.role !== "ADMIN") {
+            return res.status(403).json({ error: "Access denied. Admins only." });
+        }
 
         const { id, role } = req.body;
 
@@ -69,9 +69,9 @@ adminController.updateRole = async (req, res, next) => {
 // แสดง Post ทั้งหมด (with Pagination)
 adminController.listPosts = async (req, res, next) => {
     try {
-        // if (req.user.role !== "ADMIN") {
-        //     return createError(403, "Access denied. Admins only.");
-        //   }
+        if (req.user.role !== "ADMIN") {
+            return createError(403, "Access denied. Admins only.");
+          }
 
 
         // ✅ Extract page number from query, default to 1
@@ -122,9 +122,9 @@ adminController.listPosts = async (req, res, next) => {
 // แสดง Post ของแต่ละ User
 adminController.currentPost = async (req, res ,next) =>{
     try {
-        // if (req.user.role !== "ADMIN") {
-        //     return createError(403, "Access denied. Admins only.");
-        //   }
+        if (req.user.role !== "ADMIN") {
+            return createError(403, "Access denied. Admins only.");
+          }
 
         const {id} = req.params
 
@@ -164,9 +164,9 @@ adminController.currentPost = async (req, res ,next) =>{
 adminController.deletePost = async (req, res, next) => {
     try {
         // Check if the requester is an ADMIN
-        // if (req.user.role !== "ADMIN") {
-        //     return res.status(403).json({ error: "Access denied. Admins only." });
-        // }
+        if (req.user.role !== "ADMIN") {
+            return res.status(403).json({ error: "Access denied. Admins only." });
+        }
 
         const { id } = req.params;
 
