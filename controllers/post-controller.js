@@ -23,7 +23,7 @@ postController.createPost = async (req, res, next) => {
         )
 
         /* mock */
-        const userId = 5 /* req.user.id */
+        const userId = 5
         const budget = 8888 /* req.body */
         const view = 888 /* req.body */
 
