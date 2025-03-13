@@ -27,36 +27,63 @@ postController.createPost = async (req, res, next) => {
         const budget = 8888 /* req.body */
         const view = 888 /* req.body */
 
-        /* Prisma Create */
-        /* Place */
-        const newPlace = await prisma.place.create({
-            data: {
-                name: objPlace.name,
-                description: objPlace.description,
-                latitude: +objPlace.latitude,
-                longitude: +objPlace.longitude,
-                provinceId: +objPlace.provinceId,
-                districtId: +objPlace.districtId
-            }
-        })
-        /* Post and Images */
-        const newPost = await prisma.post.create({
-            data: {
-                images: {
-                    create: imagesUrl.map((item) => ({
-                        url: item.secure_url,
-                     })),
-                },
-                placeId:newPlace.id,
-                userId: userId,
-                title: title,
-                content: content,
-                budget: budget,
-                view: view
+        /* Check Place in database */
+        const havePlace = await prisma.place.findFirst({
+            where: {
+                name: objPlace.name
             }
         })
 
-        res.json(newPost)
+        if(havePlace){
+            /* Prisma Create Post and Images have place*/
+            const newPost = await prisma.post.create({
+                data: {
+                    images: {
+                        create: imagesUrl.map((item) => ({
+                            url: item.secure_url,
+                         })),
+                    },
+                    placeId:havePlace.id,
+                    userId: userId,
+                    title: title,
+                    content: content,
+                    budget: budget,
+                    view: view
+                }
+            })
+            return res.json(newPost)
+        }else{
+
+            /* Prisma Create */
+            /* Prisma Create Place, Post, Images whitout place*/
+            const newPlace = await prisma.place.create({
+                data: {
+                    name: objPlace.name,
+                    description: objPlace.description,
+                    latitude: +objPlace.latitude,
+                    longitude: +objPlace.longitude,
+                    provinceId: +objPlace.provinceId,
+                    districtId: +objPlace.districtId
+                }
+            })
+            const newPost = await prisma.post.create({
+                data: {
+                    images: {
+                        create: imagesUrl.map((item) => ({
+                            url: item.secure_url,
+                         })),
+                    },
+                    placeId:newPlace.id,
+                    userId: userId,
+                    title: title,
+                    content: content,
+                    budget: budget,
+                    view: view
+                }
+            })
+            return res.json(newPost)
+        }
+
     } catch (error) {
         next(error);
     }
