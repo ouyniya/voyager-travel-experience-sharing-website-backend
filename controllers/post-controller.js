@@ -8,9 +8,12 @@ postController.createPost = async (req, res, next) => {
     try {
 
         /* req.body */
-        const { place, title, content } = req.body
+        const { place, title, content, budget} = req.body
         /* แปลง String เป็น obj ด้วย JSON.parse */
         const objPlace = JSON.parse(place)
+
+        /* req.user */
+        const userId = req.user.id
 
         /* req.file */
         const images = req.files
@@ -21,11 +24,6 @@ postController.createPost = async (req, res, next) => {
                 return result
             })
         )
-
-        /* mock */
-        const userId = 5
-        const budget = 8888 /* req.body */
-        const view = 888 /* req.body */
 
         /* Check Place in database */
         const havePlace = await prisma.place.findFirst({
@@ -47,8 +45,7 @@ postController.createPost = async (req, res, next) => {
                     userId: userId,
                     title: title,
                     content: content,
-                    budget: budget,
-                    view: view
+                    budget: +budget,
                 }
             })
             return res.json(newPost)
@@ -77,12 +74,12 @@ postController.createPost = async (req, res, next) => {
                     userId: userId,
                     title: title,
                     content: content,
-                    budget: budget,
-                    view: view
+                    budget: +budget,
                 }
             })
             return res.json(newPost)
         }
+        // res.json({message:"createPost"})
 
     } catch (error) {
         next(error);
