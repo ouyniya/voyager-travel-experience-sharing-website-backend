@@ -48,7 +48,7 @@ postController.createPost = async (req, res, next) => {
                     budget: +budget,
                 }
             })
-            return res.json(newPost)
+            return res.json({message:"create post",newPost})
         }else{
 
             /* Prisma Create */
@@ -77,7 +77,7 @@ postController.createPost = async (req, res, next) => {
                     budget: +budget,
                 }
             })
-            return res.json(newPost)
+            return res.json({message:"create post and add new place",newPost})
         }
         // res.json({message:"createPost"})
 
@@ -85,5 +85,55 @@ postController.createPost = async (req, res, next) => {
         next(error);
     }
 };
+
+postController.getAllPosts = async (req, res, next) => {
+    try {
+        const post = await prisma.post.findMany({
+            select: {
+                id:true,
+                userId:true,
+                placeId:true,
+                title:true,
+                content:true,
+                budget:true,
+                view:true,
+                images:true
+            }
+        })
+
+        res.json({message:"getAllPosts", post})
+    } catch (error) {
+        next(error)
+    }
+}
+
+postController.getPostFromUserId = async (req, res, next) => {
+    try {
+        const {userId} = req.params
+        const post = await prisma.post.findMany({
+            where: {
+                userId: +userId
+            }
+        })
+
+        res.json({message:"getPostFromUserId",post})
+    } catch (error) {
+        next(error)
+    }
+}
+
+postController.getPostFromPostId = async (req, res ,next) => {
+    try {
+        const {id} = req.params
+        const post = await prisma.post.findFirst({
+            where: {
+                id: +id
+            }
+        })
+        res.json({message:"getPostFromPostId", post})
+    } catch (error) {
+        next(error)
+    }
+}
 
 module.exports = postController;

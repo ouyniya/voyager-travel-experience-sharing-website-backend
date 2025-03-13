@@ -5,9 +5,9 @@ const authenticate = require("../middlewares/authenticate");
 const router = express.Router();
 
 router.post("/",authenticate, upload.array("images",10), postController.createPost);
-router.get("/posts", ()=>{})
-router.get("/posts/:userId", ()=>{})
-router.get("/posts/:id", ()=>{})
+router.get("/", postController.getAllPosts)
+router.get("/:userId", authenticate, postController.getPostFromUserId)
+router.get("/each-posts/:id", postController.getPostFromPostId)
 
 
 module.exports = router;
