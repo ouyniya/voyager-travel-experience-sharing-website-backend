@@ -2,9 +2,10 @@ const express = require("express");
 const trackViewController = require("../controllers/track-view-controller");
 const router = express.Router();
 
-router.post("/", trackViewController.trackView);
+router.get("/places", trackViewController.getTrackViewsByPlace);
 router.get("/", trackViewController.getAllTrackViews);
 router.get("/:postId", trackViewController.getTrackViewsByPostId);
-router.get("/:placeId", trackViewController.getTrackViewsByPlaceId);
+router.get("/place/:placeId", trackViewController.getTrackViewsByPlaceId);
+router.post("/", trackViewController.trackView);
 
 module.exports = router;
