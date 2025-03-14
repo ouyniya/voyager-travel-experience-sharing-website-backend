@@ -10,6 +10,7 @@ const notFound = require("./middlewares/not-found");
 const aiRoute = require("./routes/ai-route");
 const trackViewRoute = require("./routes/track-view-route");
 const adminRoute = require("./routes/admin-route")
+const wishlistRoute =require("./routes/wishlist-route")
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/api/ai", aiRoute);
 app.use("/api/comments", commentRoute);
 app.use("/api/track-view", trackViewRoute);
 app.use("/api/admin", adminRoute);
+app.use("/api/wishlists", wishlistRoute);
 
 // error middlewares
 app.use(handleErrors);
