@@ -4,8 +4,8 @@ const commentController = {};
 
 commentController.addComment = async (req, res, next) => {
   try {
-    //   const userId = req.user.id;
-    const userId = "1"; // for testing
+    const userId = req.user.id;
+    // const userId = "1"; // for testing
     const { postId, content, parentId } = req.body;
 
     // already validate by zod
@@ -28,8 +28,8 @@ commentController.addComment = async (req, res, next) => {
 
 commentController.updateComment = async (req, res, next) => {
   try {
-    //   const userId = req.user.id;
-    const userId = "1"; // for testing only
+    const userId = req.user.id;
+    // const userId = "1"; // for testing only
     const { commentId } = req.params;
     const { content } = req.body;
 
@@ -92,8 +92,8 @@ commentController.updateComment = async (req, res, next) => {
 
 commentController.deleteComment = async (req, res, next) => {
   try {
-    // const userId = req.user.id;
-    const userId = 1;
+    const userId = req.user.id;
+    // const userId = 1;
     const { commentId } = req.params;
 
     // validate
