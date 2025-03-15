@@ -6,7 +6,7 @@ const {
   loginSchema,
   registerSchema,
 } = require("../middlewares/validators");
-// const authenticate = require("../middlewares/authenticate");
+const authenticate = require("../middlewares/authenticate");
 
 router.post(
   "/register",
@@ -16,6 +16,6 @@ router.post(
 
 router.post("/login", validationZod(loginSchema), authController.login);
 
-// router.get("/current-user", authenticate, authController.currentUser);
+router.get("/current-user", authenticate, authController.currentUser);
 
 module.exports = router;

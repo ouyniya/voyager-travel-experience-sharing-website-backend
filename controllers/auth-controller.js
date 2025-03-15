@@ -94,12 +94,31 @@ authController.login = async (req, res, next) => {
   }
 };
 
-// authController.currentUser = async (req, res, next) => {
-//   try {
-//     res.json({ message: "Hello current user" });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+authController.currentUser = async (req, res, next) => {
+  try {
+      // console.log(req.user)
+
+      const { email } = req.user
+
+      const user = await prisma.user.findUnique({
+          where: {
+              email
+          }, 
+          select: {
+              id: true,
+              username: true,
+              email: true,
+              role: true,
+              profileImage: true
+          }
+      })
+
+      // console.log(profile)
+
+      res.json({ user })
+  } catch (error) {
+      next(error)
+  }
+}
 
 module.exports = authController;
