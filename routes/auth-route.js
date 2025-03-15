@@ -16,6 +16,8 @@ router.post(
 
 router.post("/login", validationZod(loginSchema), authController.login);
 
+router.post("/google", validationZod(loginSchema), authController.login);
+
 router.get("/current-user", authenticate, authController.currentUser);
 
 module.exports = router;
