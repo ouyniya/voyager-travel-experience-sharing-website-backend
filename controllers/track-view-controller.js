@@ -148,38 +148,129 @@ trackViewController.getTrackViewsByPlaceId = async (req, res, next) => {
 
 trackViewController.getTrackViewsByPlace = async (req, res, next) => {
   try {
-    // Fetch the total views for each place
-    const topPlaces = await prisma.post.groupBy({
+    // Fetch total views for each place
+    const placeViews = await prisma.post.groupBy({
       by: ["placeId"],
-      _sum: {
-        view: true,
-      },
-      where: {
-        placeId: { not: null }, // Exclude posts without a place
-      },
+      _sum: { view: true },
+      where: { placeId: { not: null } },
     });
 
-    // Manually sort by total views in descending order
-    const sortedTopPlaces = topPlaces
-      .sort((a, b) => (b._sum.view || 0) - (a._sum.view || 0)) // Ensure no undefined values
-      .slice(0, 10); // Limit to top 10 after sorting
+    // Sort places by total views in descending order and limit to top 10
+    const sortedTopPlaces = placeViews
+      .sort((a, b) => (b._sum.view || 0) - (a._sum.view || 0))
+      .slice(0, 10);
 
     const placeIds = sortedTopPlaces.map((p) => p.placeId);
 
-    // Fetch place details, ensuring order preservation
+    // Fetch place details with province and district
     const places = await prisma.place.findMany({
       where: { id: { in: placeIds } },
+      select: {
+        id: true,
+        name: true,
+        district: {
+          select: {
+            id: true,
+            name: true,
+            province: { select: { id: true, name: true } },
+          },
+        },
+      },
+    });
+
+    // Construct place results
+    const topPlacesResult = sortedTopPlaces.map((p) => {
+      const place = places.find((place) => place.id === p.placeId);
+      return {
+        id: p.placeId,
+        name: place?.name || "Unknown",
+        totalViews: p._sum.view || 0,
+        district: place?.district?.name || "Unknown",
+        province: place?.district?.province?.name || "Unknown",
+      };
+    });
+
+    // Group views by province
+    const provinceViews = await prisma.post.groupBy({
+      by: ["placeId"],
+      _sum: { view: true },
+      where: { placeId: { not: null } },
+    });
+
+    // Fetch province details
+    const provinceData = await prisma.place.findMany({
+      where: { id: { in: provinceViews.map((p) => p.placeId) } },
+      select: { id: true, provinceId: true },
+    });
+
+    const provinces = await prisma.province.findMany({
+      where: { id: { in: provinceData.map((p) => p.provinceId) } },
       select: { id: true, name: true },
     });
 
-    // Ensure response maintains sorting
-    const result = sortedTopPlaces.map((p) => ({
-      id: p.placeId,
-      name: places.find((place) => place.id === p.placeId)?.name || "Unknown",
-      totalViews: p._sum.view || 0,
-    }));
+    // Aggregate views by province
+    const provinceTotals = {};
+    provinceViews.forEach((p) => {
+      const provinceId = provinceData.find(
+        (pl) => pl.id === p.placeId
+      )?.provinceId;
+      if (provinceId) {
+        provinceTotals[provinceId] =
+          (provinceTotals[provinceId] || 0) + (p._sum.view || 0);
+      }
+    });
 
-    res.json(result);
+    // Sort provinces by views (desc)
+    const topProvinces = Object.keys(provinceTotals)
+      .map((id) => ({
+        id: Number(id),
+        name:
+          provinces.find((prov) => prov.id === Number(id))?.name || "Unknown",
+        totalViews: provinceTotals[id],
+      }))
+      .sort((a, b) => b.totalViews - a.totalViews);
+
+    // Group views by district
+    const districtViews = await prisma.post.groupBy({
+      by: ["placeId"],
+      _sum: { view: true },
+      where: { placeId: { not: null } },
+    });
+
+    // Fetch district details
+    const districtData = await prisma.place.findMany({
+      where: { id: { in: districtViews.map((d) => d.placeId) } },
+      select: { id: true, districtId: true },
+    });
+
+    const districts = await prisma.district.findMany({
+      where: { id: { in: districtData.map((d) => d.districtId) } },
+      select: { id: true, name: true },
+    });
+
+    // Aggregate views by district
+    const districtTotals = {};
+    districtViews.forEach((d) => {
+      const districtId = districtData.find(
+        (pl) => pl.id === d.placeId
+      )?.districtId;
+      if (districtId) {
+        districtTotals[districtId] =
+          (districtTotals[districtId] || 0) + (d._sum.view || 0);
+      }
+    });
+
+    // Sort districts by views (desc)
+    const topDistricts = Object.keys(districtTotals)
+      .map((id) => ({
+        id: Number(id),
+        name:
+          districts.find((dist) => dist.id === Number(id))?.name || "Unknown",
+        totalViews: districtTotals[id],
+      }))
+      .sort((a, b) => b.totalViews - a.totalViews);
+
+    res.json({ topPlaces: topPlacesResult, topProvinces, topDistricts });
   } catch (error) {
     next(error);
   }
