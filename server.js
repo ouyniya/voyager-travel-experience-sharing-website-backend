@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const cookieSession = require("cookie-session");
+const session = require("express-session"); // Use express-session
 const passport = require("passport");
 const cors = require("cors");
 const morgan = require("morgan");
-const passportSetup = require("./configs/passport")
+const passportSetup = require("./configs/passport");
 
 const authRoute = require("./routes/auth-route");
 const postRoute = require("./routes/post-route");
@@ -21,30 +21,27 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
 app.use(morgan("dev"));
-// app.use(
-//   cookieSession({
-//     name: "session",
-//     keys: ["googleAuth"],
-//     maxAge: 24 * 60 * 60 * 100,
-//   })
-// );
-
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(cors({
     origin: "http://localhost:5174",
     methods: "GET,POST,PUT,DELETE",
     credentials: true
-}))
+}));
+
+// Use express-session to handle sessions (instead of cookie-session)
+app.use(
+	session({
+		secret: "googleauth", // Use your secret key
+		resave: false,
+		saveUninitialized: true,
+		cookie: {
+			maxAge: 24 * 60 * 60 * 1000 // 24 hours
+		}
+	})
+);
+
+app.use(passport.initialize()); // Initialize passport
+app.use(passport.session()); // Add this to persist the user session
 
 // Routes
 app.use("/auth", googleAuthRoute);
