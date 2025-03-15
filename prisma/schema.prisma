@@ -32,7 +32,7 @@ model User {
   googleId     String?    @unique
   username     String?
   email        String     @unique
-  password     String
+  password     String? // Only for local users
   role         Role       @default(USER) // Default role is USER
   profileImage String?
   createdAt    DateTime   @default(now())
@@ -40,7 +40,7 @@ model User {
   comments     Comment[]
   wishlists    Wishlist[]
 
-  isGoogleUser Boolean    @default(false) // Tracks if the user logged in with Google
+  isGoogleUser Boolean @default(false) // Tracks if the user logged in with Google
 }
 
 model Province {

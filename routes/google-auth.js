@@ -20,6 +20,7 @@ router.get("/login/failed", (req, res, next) => {
   });
 });
 
+// Google login callback
 router.get(
   "/google/callback",
   passport.authenticate("google", {
@@ -28,11 +29,14 @@ router.get(
   })
 );
 
-router.get("/google", passport.authenticate("google", ["profile", "email"]));
+// router.get("/google", passport.authenticate("google", ["profile", "email"]));
 
+// Logout route
 router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect(process.env.GOOGLE_CLIENT_URL);
-});
+    req.logout((err) => {
+      if (err) return next(err);
+      res.redirect(process.env.GOOGLE_CLIENT_URL);
+    });
+  });
 
 module.exports = router;
