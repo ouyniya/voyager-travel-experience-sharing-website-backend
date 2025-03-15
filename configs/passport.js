@@ -9,16 +9,48 @@ passport.use(
       callbackURL: "/auth/google/callback",
       scope: ["profile", "email"],
     },
-    function (accessToken, refreshToken, profile, callback) {
-      callback(null, profile);
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const { email, id, displayName, photos } = profile;
+
+        // Check if the user already exists in DB
+        let user = await prisma.user.findUnique({
+          where: { googleId: id },
+        });
+
+        // If user doesn't exist, create a new one
+        if (!user) {
+          user = await prisma.user.create({
+            data: {
+              googleId: id,
+              email,
+              username: displayName || email.split("@")[0],
+              profileImage: photos[0].value,
+              isGoogleUser: true,
+            },
+          });
+        }
+
+        // Return the user object
+        return done(null, user);
+      } catch (error) {
+        done(error, null);
+      }
     }
   )
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id },
+    });
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
 });

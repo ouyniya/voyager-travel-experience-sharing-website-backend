@@ -39,6 +39,8 @@ model User {
   posts        Post[]
   comments     Comment[]
   wishlists    Wishlist[]
+
+  isGoogleUser Boolean    @default(false) // Tracks if the user logged in with Google
 }
 
 model Province {
