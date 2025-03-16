@@ -5,7 +5,7 @@ const authenticate = require("../middlewares/authenticate")
 const router = express.Router();
 
 router.get("/:postId", commentController.getPostComments); // Get Comments by Post (no authenticate function)
-router.post("/", validationZod(commentSchema), authenticate, commentController.addComment); // Create Comment
+router.post("/", authenticate, validationZod(commentSchema), commentController.addComment); // Create Comment
 router.put("/:commentId", authenticate, commentController.updateComment); // Update Comment
 router.delete("/:commentId", authenticate, commentController.deleteComment); // Delete Comment
 

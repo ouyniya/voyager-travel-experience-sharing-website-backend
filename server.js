@@ -22,22 +22,25 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(cors({
+app.use(
+  cors({
     origin: "http://localhost:5174",
     methods: "GET,POST,PUT,DELETE",
-    credentials: true
-}));
+    credentials: true,
+    "Access-Control-Allow-Credentials": true,
+  })
+);
 
 // Use express-session to handle sessions (instead of cookie-session)
 app.use(
-	session({
-		secret: "googleauth", // Use your secret key
-		resave: false,
-		saveUninitialized: true,
-		cookie: {
-			maxAge: 24 * 60 * 60 * 1000 // 24 hours
-		}
-	})
+  session({
+    secret: process.env.SESSION_SECRET, // Use your secret key
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    },
+  })
 );
 
 app.use(passport.initialize()); // Initialize passport

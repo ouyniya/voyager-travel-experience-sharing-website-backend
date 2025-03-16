@@ -1,5 +1,6 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
+const prisma = require("./prisma");
 
 passport.use(
   new GoogleStrategy(
@@ -11,7 +12,9 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const { email, id, displayName, photos } = profile;
+        // console.log("*****Google Profile:", profile);
+        const { email, name, picture } = profile._json;
+        const { id } = profile;
 
         // Check if the user already exists in DB
         let user = await prisma.user.findUnique({
@@ -24,8 +27,8 @@ passport.use(
             data: {
               googleId: id,
               email,
-              username: displayName || email.split("@")[0],
-              profileImage: photos[0].value,
+              username: name || email.split("@")[0],
+              profileImage: picture,
               isGoogleUser: true,
             },
           });
