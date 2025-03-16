@@ -29,15 +29,18 @@ enum Role {
 
 model User {
   id           Int        @id @default(autoincrement())
+  googleId     String?    @unique
   username     String?
   email        String     @unique
-  password     String
+  password     String? // Only for local users
   role         Role       @default(USER) // Default role is USER
   profileImage String?
   createdAt    DateTime   @default(now())
   posts        Post[]
   comments     Comment[]
   wishlists    Wishlist[]
+
+  isGoogleUser Boolean @default(false) // Tracks if the user logged in with Google
 }
 
 model Province {

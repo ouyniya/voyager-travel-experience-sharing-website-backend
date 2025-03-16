@@ -24,7 +24,7 @@ authController.register = async (req, res, next) => {
     });
 
     if (checkEmail) {
-      return createError(400, "Email is already used");
+      return createError(400, "User already exists");
     }
 
     // Generate username from Email
@@ -44,8 +44,18 @@ authController.register = async (req, res, next) => {
       },
     });
 
+    // Login the user after successful sign-up
+    req.login(user, (err) => {
+      if (err) return next(err);
+      res.status(200).json({
+        error: false,
+        message: "Successfully signed up",
+        user: user,
+      });
+    });
+
     // response to frontend >> register success
-    res.json({ message: "User registered successfully" });
+    // res.json({ message: "User registered successfully" });
   } catch (error) {
     next(error);
   }
@@ -64,23 +74,26 @@ authController.login = async (req, res, next) => {
     });
 
     if (!profile) {
-      return createError(400, "Email or password is invalid");
+      return createError(404, "User not found");
     }
 
-    // check password valid
-    const isPasswordValid = await bcrypt.compare(password, profile.password);
-
-    if (!isPasswordValid) {
-      return createError(400, "Password is invalid");
+    // Check if the user is a local user (not Google)
+    if (!profile.isGoogleUser) {
+      const isPasswordValid = await bcrypt.compare(password, profile.password);
+      if (!isPasswordValid) {
+        return createError(400, "Invalid password");
+      }
     }
 
     // generate token
     const user = {
       id: profile.id,
+      googleId: profile.googleId,
       email: profile.email,
       username: profile.username,
       role: profile.role,
-      profileImage: profile.profileImage
+      profileImage: profile.profileImage,
+      isGoogleUser: profile.isGoogleUser,
     };
 
     const token = jwt.sign(user, process.env.SECRET_KEY, {
@@ -96,29 +109,29 @@ authController.login = async (req, res, next) => {
 
 authController.currentUser = async (req, res, next) => {
   try {
-      // console.log(req.user)
+    // console.log(req.user)
 
-      const { email } = req.user
+    const { email } = req.user;
 
-      const user = await prisma.user.findUnique({
-          where: {
-              email
-          }, 
-          select: {
-              id: true,
-              username: true,
-              email: true,
-              role: true,
-              profileImage: true
-          }
-      })
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        role: true,
+        profileImage: true,
+      },
+    });
 
-      // console.log(profile)
+    // console.log(profile)
 
-      res.json({ user })
+    res.json({ user });
   } catch (error) {
-      next(error)
+    next(error);
   }
-}
+};
 
 module.exports = authController;
