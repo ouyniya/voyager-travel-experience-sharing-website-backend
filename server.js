@@ -16,6 +16,7 @@ const trackViewRoute = require("./routes/track-view-route");
 const adminRoute = require("./routes/admin-route");
 const wishlistRoute = require("./routes/wishlist-route");
 const googleAuthRoute = require("./routes/google-auth");
+const profileRoute = require("./routes/profile-route");
 
 const app = express();
 
@@ -55,6 +56,7 @@ app.use("/api/comments", commentRoute);
 app.use("/api/track-view", trackViewRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/wishlists", wishlistRoute);
+app.use("/api/profile", profileRoute);
 
 // error middlewares
 app.use(handleErrors);
