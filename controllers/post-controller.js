@@ -8,15 +8,20 @@ postController.createPost = async (req, res, next) => {
     try {
 
         /* req.body */
-        const { place, title, content, budget } = req.body
+        const { title, content, budget,
+            name, description, latitude, longitude, 
+            provinceId, districtId
+         } = req.body
         /* แปลง String เป็น obj ด้วย JSON.parse */
-        const objPlace = JSON.parse(place)
+        console.log("***", req.body)
+        // const objPlace = JSON.parse(place)
 
         /* req.user */
         const userId = req.user.id
 
         /* req.file */
         const images = req.files
+        console.log(req.files)
         let imagesUrl = await Promise.all(
             images.map(async (image) => {
                 let result = await cloudinary.uploader.upload(image.path, { resource_type: "image" });
@@ -28,7 +33,7 @@ postController.createPost = async (req, res, next) => {
         /* Check Place in database */
         const havePlace = await prisma.place.findFirst({
             where: {
-                name: objPlace.name
+                name
             }
         })
 
@@ -55,12 +60,12 @@ postController.createPost = async (req, res, next) => {
             /* Prisma Create Place, Post, Images whitout place*/
             const newPlace = await prisma.place.create({
                 data: {
-                    name: objPlace.name,
-                    description: objPlace.description,
-                    latitude: +objPlace.latitude,
-                    longitude: +objPlace.longitude,
-                    provinceId: +objPlace.provinceId,
-                    districtId: +objPlace.districtId
+                    name,
+                    description,
+                    latitude: +latitude,
+                    longitude: +longitude,
+                    provinceId: +provinceId,
+                    districtId: +districtId
                 }
             })
             const newPost = await prisma.post.create({
