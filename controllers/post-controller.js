@@ -233,7 +233,7 @@ postController.deletePost = async (req, res, next) => {
                 id: +id
             }
         })
-        res.json({ message: "Delete success", deleted })
+        res.json({ message: `post id: ${id} has been deleted.`, deleted })
     } catch (error) {
         next(error)
     }
