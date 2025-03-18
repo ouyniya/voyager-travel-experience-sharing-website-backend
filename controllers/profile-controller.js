@@ -60,7 +60,7 @@ profileController.updateProfileImage = async (req, res, next) => {
       ? await cloudinary.uploader.upload(req.file.path)
       : null;
 
-    console.log("*****", image?.secure_url)
+    console.log("*****", image?.secure_url);
 
     const user = await prisma.user.update({
       where: {
@@ -78,6 +78,31 @@ profileController.updateProfileImage = async (req, res, next) => {
     if (req.file) {
       fs.unlinkSync(req.file.path);
     }
+  }
+};
+
+profileController.getUserInfoByUserId = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+
+    // validate
+    if (isNaN(userId)) {
+      return createError(400, "Invalid user id.");
+    }
+
+    // connect to db
+    const user = await prisma.user.findFirst({
+      where: {
+        id: +userId,
+      },
+      omit: {
+        password: true,
+      },
+    });
+
+    res.json(user);
+  } catch (error) {
+    next(error);
   }
 };
 

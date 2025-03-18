@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/",authenticate, upload.array("images",10), postController.createPost);
 router.get("/", postController.getAllPosts)
-router.get("/:userId", authenticate, postController.getPostFromUserId)
+router.get("/:userId", postController.getPostFromUserId)
 router.get("/each-posts/:id", postController.getPostFromPostId)
 router.put("/:id",authenticate , postController.updatePost)
 router.delete("/:id",authenticate , postController.deletePost)
