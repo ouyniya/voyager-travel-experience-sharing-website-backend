@@ -77,6 +77,10 @@ adminController.listPosts = async (req, res, next) => {
         // ✅ Extract page number from query, default to 1
         const page = parseInt(req.query.page) || 1;
         const pageSize = 10; // ✅ Limit 10 posts per page
+        console.log("page")
+        console.log(page)
+        console.log("pageSize")
+        console.log(pageSize)
 
         // ✅ Fetch posts with pagination
         const posts = await prisma.post.findMany({
@@ -87,7 +91,13 @@ adminController.listPosts = async (req, res, next) => {
                 title: true,
                 content: true,
                 budget: true,
-                placeId: true,
+                place: {
+                    select:{
+                        id:true,
+                        name:true,
+                        description:true,
+                    }
+                },
                 user: {
                     select: {
                         id: true, 
