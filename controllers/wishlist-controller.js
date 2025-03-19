@@ -5,7 +5,8 @@ const wishlistController = {};
 // 1. Create Wishlist (Only for ADMIN & USER roles)
 wishlistController.createWishlist = async (req, res, next) => {
   try {
-    const { userId, postId } = req.body;
+    const { postId } = req.body;
+    const userId = req.user.id;
     const loggedInUserRole = req.user?.role;
 
     //Validate required fields

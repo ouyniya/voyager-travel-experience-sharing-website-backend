@@ -18,6 +18,7 @@ const wishlistRoute = require("./routes/wishlist-route");
 const googleAuthRoute = require("./routes/google-auth");
 const profileRoute = require("./routes/profile-route");
 const locationRoute = require("./routes/location-route");
+const filterRoute = require("./routes/filter-route");
 
 const app = express();
 
@@ -59,6 +60,7 @@ app.use("/api/admin", adminRoute);
 app.use("/api/wishlists", wishlistRoute);
 app.use("/api/profile", profileRoute);
 app.use("/api/location", locationRoute);
+app.use("/api/filter", filterRoute);
 
 // error middlewares
 app.use(handleErrors);

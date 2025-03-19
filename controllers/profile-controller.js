@@ -60,7 +60,11 @@ profileController.updateProfileImage = async (req, res, next) => {
       ? await cloudinary.uploader.upload(req.file.path)
       : null;
 
-    console.log("*****", image?.secure_url);
+      if (!image) {
+        return createError(404, "Profile Image required")
+      }
+
+    // console.log("*****", image?.secure_url);
 
     const user = await prisma.user.update({
       where: {
