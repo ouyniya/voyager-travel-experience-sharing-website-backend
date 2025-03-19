@@ -53,7 +53,7 @@ model Province {
 model District {
   id         Int      @id @default(autoincrement())
   name       String
-  province   Province @relation(fields: [provinceId], references: [id])
+  province   Province @relation(fields: [provinceId], references: [id], onDelete: Cascade)
   provinceId Int
   places     Place[]
 }
@@ -64,9 +64,9 @@ model Place {
   description String?  @db.Text
   latitude    Float?
   longitude   Float?
-  province    Province @relation(fields: [provinceId], references: [id])
+  province    Province @relation(fields: [provinceId], references: [id], onDelete: Cascade)
   provinceId  Int
-  district    District @relation(fields: [districtId], references: [id])
+  district    District @relation(fields: [districtId], references: [id], onDelete: Cascade)
   districtId  Int
   createdAt   DateTime @default(now())
   posts       Post[]
@@ -74,9 +74,9 @@ model Place {
 
 model Post {
   id        Int         @id @default(autoincrement())
-  user      User        @relation(fields: [userId], references: [id])
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
-  place     Place?      @relation(fields: [placeId], references: [id])
+  place     Place?      @relation(fields: [placeId], references: [id], onDelete: Cascade)
   placeId   Int?
   title     String      @db.Text
   content   String      @db.Text
@@ -91,27 +91,27 @@ model Post {
 
 model PostImage {
   id     Int    @id @default(autoincrement())
-  post   Post   @relation(fields: [postId], references: [id])
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId Int
   url    String
 }
 
 model Wishlist {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
   createdAt DateTime @default(now())
 }
 
 model Comment {
   id        Int       @id @default(autoincrement())
-  post      Post      @relation(fields: [postId], references: [id])
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
-  user      User      @relation(fields: [userId], references: [id])
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
-  parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id])
+  parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: Cascade)
   parentId  Int?
   children  Comment[] @relation("CommentToComment")
   content   String    @db.Text
@@ -125,5 +125,5 @@ model View {
   views     Int      @default(1) // จำนวน view ของ page
   createdAt DateTime @default(now())
 
-  post Post @relation(fields: [postId], references: [id])
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
