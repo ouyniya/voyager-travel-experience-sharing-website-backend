@@ -31,7 +31,7 @@ adminController.updateRole = async (req, res, next) => {
         if (req.user.role !== "ADMIN") {
             return res.status(403).json({ error: "Access denied. Admins only." });
         }
-
+        console.log(req.body)
         const { id, role } = req.body;
 
         // Validate `id` (must be a number)
@@ -194,5 +194,19 @@ adminController.deletePost = async (req, res, next) => {
         next(error);
     }
 };
+
+adminController.deleteUser = async (req, res, next) => {
+    try {
+        const {id} = req.params
+        const deleted = await prisma.user.delete({
+            where:{
+                id: +id
+            }
+        })
+        res.json({message:"Delete success",deleted})
+    } catch (error) {
+        next(error)
+    }
+}
 
 module.exports = adminController;
