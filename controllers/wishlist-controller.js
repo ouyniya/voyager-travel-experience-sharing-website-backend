@@ -1,8 +1,9 @@
 const prisma = require("../configs/prisma");
 const createError = require("../utils/createError");
+const wishlistController = {};
 
 // 1. Create Wishlist (Only for ADMIN & USER roles)
-const createWishlist = async (req, res, next) => {
+wishlistController.createWishlist = async (req, res, next) => {
   try {
     const { userId, postId } = req.body;
     const loggedInUserRole = req.user?.role;
@@ -26,7 +27,10 @@ const createWishlist = async (req, res, next) => {
 
     //Check if user role is allowed (Only ADMIN or USER)
     if (loggedInUserRole !== "ADMIN" && loggedInUserRole !== "USER") {
-      return createError(403, "Access denied. Only ADMIN or USER can create wishlists.");
+      return createError(
+        403,
+        "Access denied. Only ADMIN or USER can create wishlists."
+      );
     }
 
     //Check if wishlist already exists for this user and post
@@ -54,7 +58,7 @@ const createWishlist = async (req, res, next) => {
 };
 
 // 2. Show All Wishlists (Only ADMIN Can Access)
-const getAllWishlists = async (req, res, next) => {
+wishlistController.getAllWishlists = async (req, res, next) => {
   try {
     //Check if user role is ADMIN
     if (!req.user || req.user.role !== "ADMIN") {
@@ -107,18 +111,18 @@ const getAllWishlists = async (req, res, next) => {
 };
 
 // 3. Get all wishlist posts by userId (Users ดู wishlist ของตัวเองเท่านั้น, Admin ดูได้หมด)
-const getWishlistByUserId = async (req, res, next) => {
+wishlistController.getWishlistByUserId = async (req, res, next) => {
   try {
     const { userId } = req.params;
     const loggedInUserId = req.user?.id;
     const userRole = req.user?.role;
 
-    //Validate userId (must be a number)
+    // Validate userId (must be a number)
     if (!userId || isNaN(userId)) {
       return createError(400, "Invalid userId. It must be a number.");
     }
 
-    //Check if user exists
+    // Check if user exists
     const userExists = await prisma.user.findUnique({
       where: { id: +userId },
     });
@@ -126,12 +130,15 @@ const getWishlistByUserId = async (req, res, next) => {
       return createError(404, `User with ID ${userId} not found.`);
     }
 
-    //Users สามารถดู wishlist ของตัวเองเท่านั้น, ส่วน Admin ดูได้หมด
+    // Users สามารถดู wishlist ของตัวเองเท่านั้น, ส่วน Admin ดูได้หมด
     if (userRole !== "ADMIN" && +userId !== loggedInUserId) {
-      return createError(403, "Access denied. You can only view your own wishlist.");
+      return createError(
+        403,
+        "Access denied. You can only view your own wishlist."
+      );
     }
 
-    //Fetch wishlists for the given user
+    // Fetch wishlists for the given user
     const wishlists = await prisma.wishlist.findMany({
       where: { userId: +userId },
       select: {
@@ -143,20 +150,74 @@ const getWishlistByUserId = async (req, res, next) => {
             title: true,
             content: true,
             budget: true,
+            view: true,
             placeId: true,
+            images: {
+              take: 1, // Get the first image for each post
+              select: {
+                url: true,
+              },
+            },
           },
         },
       },
     });
 
+    // Add image and post details to the result
+    const wishlistWithDetails = wishlists.map((wishlist) => {
+      const post = wishlist.post;
+      const postImage = post.images.length > 0 ? post.images[0].url : null; // Get first image URL or null if none
+      return {
+        ...wishlist,
+        post: {
+          ...post,
+          postImage,
+        },
+      };
+    });
+
     res.json({
       message: `Wishlist for User ID ${userId}`,
-      totalWishlists: wishlists.length,
-      result: wishlists,
+      totalWishlists: wishlistWithDetails.length,
+      result: wishlistWithDetails,
     });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { getAllWishlists, createWishlist, getWishlistByUserId };
+wishlistController.deleteWishlist = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const { wishlistId } = req.params;
+
+    // Validate userId (must be a number)
+    if (!userId || isNaN(userId)) {
+      return createError(400, "Invalid userId. It must be a number.");
+    }
+    if (!wishlistId || isNaN(wishlistId)) {
+      return createError(400, "Invalid wishlistId. It must be a number.");
+    }
+
+    // // Check if user exists
+    const wishlistsExists = await prisma.wishlist.findUnique({
+      where: { id: +wishlistId },
+    });
+    if (!wishlistsExists) {
+      return createError(404, `Wishlist ID ${wishlistId} not found.`);
+    }
+
+    // Fetch wishlists for the given user
+    const wishlists = await prisma.wishlist.delete({
+      where: { userId: +userId, id: +wishlistId },
+    });
+
+    res.json({
+      message: `Wishlist ID ${wishlistId} deleted`,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = wishlistController;

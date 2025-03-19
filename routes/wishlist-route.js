@@ -1,11 +1,11 @@
-const express = require("express")
-const {createWishlist,getAllWishlists, getWishlistByUserId, getWishlistById} = require("../controllers/wishlist-controller");
+const express = require("express");
+const wishlistController = require("../controllers/wishlist-controller");
 const authenticate = require("../middlewares/authenticate");
 const wishlistRoute = express.Router();
 
-wishlistRoute.post('/',authenticate, createWishlist);
-wishlistRoute.get('/',authenticate, getAllWishlists);
-wishlistRoute.get('/user/:userId',authenticate, getWishlistByUserId);
+wishlistRoute.post("/", authenticate, wishlistController.createWishlist);
+wishlistRoute.delete("/:wishlistId", authenticate, wishlistController.deleteWishlist);
+wishlistRoute.get("/", authenticate, wishlistController.getAllWishlists);
+wishlistRoute.get("/user/:userId", authenticate, wishlistController.getWishlistByUserId);
 
-
-module.exports = wishlistRoute
+module.exports = wishlistRoute;
