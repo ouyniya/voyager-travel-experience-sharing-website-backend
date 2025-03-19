@@ -28,13 +28,27 @@ postController.createPost = async (req, res, next) => {
 
     // validate
     if (
+        !title.trim() ||
+        !content.trim() ||
+        !budget ||
+        !name ||
+        !description ||
+        !latitude ||
+        !longitude ||
+        !provinceId ||
+        !districtId
+      ) {
+        return createError(400, "Missing some inputs");
+      }
+
+    if (
       isNaN(latitude) ||
       isNaN(longitude) ||
       isNaN(provinceId) ||
       isNaN(districtId) ||
       isNaN(budget)
     ) {
-      return createError(400, "Invalid user id");
+      return createError(400, "Invalid number");
     }
 
     if (
