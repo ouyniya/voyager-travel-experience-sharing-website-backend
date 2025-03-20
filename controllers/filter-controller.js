@@ -6,7 +6,7 @@ const filterController = {};
 // GET /api/filter?page=1&limit=10
 filterController.getFilterPosts = async (req, res, next) => {
   try {
-    const { placeName, province, district, page = 1, limit = 10 } = req.query;
+    const { placeName, province, district, page = 1, limit = 12 } = req.query;
 
     // Ensure page and limit are numbers
     const pageNum = parseInt(page, 10);
