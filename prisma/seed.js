@@ -453,6 +453,107 @@ const commentsData = [
   },
 ];
 
+const wishlistData = [
+  // User 2 - 10 data
+  { postId: 2, userId: 2 },
+  { postId: 4, userId: 2 },
+  { postId: 5, userId: 2 },
+  { postId: 7, userId: 2 },
+  { postId: 9, userId: 2 },
+  { postId: 11, userId: 2 },
+  { postId: 12, userId: 2 },
+  { postId: 14, userId: 2 },
+  { postId: 16, userId: 2 },
+  { postId: 18, userId: 2 },
+
+  // User 4 - 3 data
+  { postId: 1, userId: 4 },
+  { postId: 6, userId: 4 },
+  { postId: 13, userId: 4 },
+
+  // User 5 - 5 more data
+  { postId: 3, userId: 5 },
+  { postId: 8, userId: 5 },
+  { postId: 10, userId: 5 },
+  { postId: 17, userId: 5 },
+  { postId: 19, userId: 5 },
+];
+
+const postImageData = [
+  { postId: 1, url: "https://picsum.photos/id/101/800/600" },
+  { postId: 1, url: "https://picsum.photos/id/102/800/600" },
+  { postId: 1, url: "https://picsum.photos/id/103/800/600" },
+
+  { postId: 2, url: "https://picsum.photos/id/104/800/600" },
+  { postId: 2, url: "https://picsum.photos/id/105/800/600" },
+
+  { postId: 3, url: "https://picsum.photos/id/106/800/600" },
+  { postId: 3, url: "https://picsum.photos/id/107/800/600" },
+  { postId: 3, url: "https://picsum.photos/id/108/800/600" },
+  { postId: 3, url: "https://picsum.photos/id/109/800/600" },
+  { postId: 3, url: "https://picsum.photos/id/110/800/600" },
+
+  { postId: 4, url: "https://picsum.photos/id/111/800/600" },
+
+  { postId: 5, url: "https://picsum.photos/id/112/800/600" },
+  { postId: 5, url: "https://picsum.photos/id/113/800/600" },
+  { postId: 5, url: "https://picsum.photos/id/114/800/600" },
+
+  { postId: 6, url: "https://picsum.photos/id/115/800/600" },
+  { postId: 6, url: "https://picsum.photos/id/116/800/600" },
+
+  { postId: 7, url: "https://picsum.photos/id/117/800/600" },
+  { postId: 7, url: "https://picsum.photos/id/118/800/600" },
+  { postId: 7, url: "https://picsum.photos/id/119/800/600" },
+  { postId: 7, url: "https://picsum.photos/id/120/800/600" },
+
+  { postId: 8, url: "https://picsum.photos/id/121/800/600" },
+
+  { postId: 9, url: "https://picsum.photos/id/122/800/600" },
+  { postId: 9, url: "https://picsum.photos/id/123/800/600" },
+  { postId: 9, url: "https://picsum.photos/id/124/800/600" },
+
+  { postId: 10, url: "https://picsum.photos/id/125/800/600" },
+  { postId: 10, url: "https://picsum.photos/id/126/800/600" },
+
+  { postId: 11, url: "https://picsum.photos/id/127/800/600" },
+  { postId: 11, url: "https://picsum.photos/id/128/800/600" },
+  { postId: 11, url: "https://picsum.photos/id/129/800/600" },
+  { postId: 11, url: "https://picsum.photos/id/130/800/600" },
+
+  { postId: 12, url: "https://picsum.photos/id/131/800/600" },
+
+  { postId: 13, url: "https://picsum.photos/id/132/800/600" },
+  { postId: 13, url: "https://picsum.photos/id/133/800/600" },
+  { postId: 13, url: "https://picsum.photos/id/134/800/600" },
+
+  { postId: 14, url: "https://picsum.photos/id/135/800/600" },
+  { postId: 14, url: "https://picsum.photos/id/136/800/600" },
+
+  { postId: 15, url: "https://picsum.photos/id/137/800/600" },
+  { postId: 15, url: "https://picsum.photos/id/138/800/600" },
+  { postId: 15, url: "https://picsum.photos/id/139/800/600" },
+  { postId: 15, url: "https://picsum.photos/id/140/800/600" },
+  { postId: 15, url: "https://picsum.photos/id/141/800/600" },
+
+  { postId: 16, url: "https://picsum.photos/id/142/800/600" },
+
+  { postId: 17, url: "https://picsum.photos/id/143/800/600" },
+  { postId: 17, url: "https://picsum.photos/id/144/800/600" },
+  { postId: 17, url: "https://picsum.photos/id/145/800/600" },
+
+  { postId: 18, url: "https://picsum.photos/id/146/800/600" },
+  { postId: 18, url: "https://picsum.photos/id/147/800/600" },
+
+  { postId: 19, url: "https://picsum.photos/id/148/800/600" },
+  { postId: 19, url: "https://picsum.photos/id/149/800/600" },
+  { postId: 19, url: "https://picsum.photos/id/150/800/600" },
+  { postId: 19, url: "https://picsum.photos/id/151/800/600" },
+
+  { postId: 20, url: "https://picsum.photos/id/152/800/600" },
+];
+
+
 async function seedDB() {
   await prisma.user.createMany({
     data: userData,
@@ -476,6 +577,14 @@ async function seedDB() {
 
   await prisma.comment.createMany({
     data: commentsData,
+  });
+
+  await prisma.wishlist.createMany({
+    data: wishlistData,
+  });
+
+  await prisma.postImage.createMany({
+    data: postImageData,
   });
 }
 
