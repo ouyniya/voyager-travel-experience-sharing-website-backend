@@ -6,129 +6,128 @@ const createError = require("../utils/createError");
 const postController = {};
 
 postController.createPost = async (req, res, next) => {
-    try {
-      /* req.body */
-      const {
-        title,
-        content,
-        budget,
-        name,
-        description,
-        latitude,
-        longitude,
-        provinceId,
-        districtId,
-      } = req.body;
-  
-      const userId = req.user.id;
-  
-      // Validate inputs
-      if (
-        !title.trim() ||
-        !content.trim() ||
-        !budget ||
-        !name ||
-        !description ||
-        !latitude ||
-        !longitude ||
-        !provinceId ||
-        !districtId
-      ) {
-        return createError(400, "Missing some inputs");
-      }
-  
-      if (
-        isNaN(latitude) ||
-        isNaN(longitude) ||
-        isNaN(provinceId) ||
-        isNaN(districtId) ||
-        isNaN(budget)
-      ) {
-        return createError(400, "Invalid number");
-      }
-  
-      if (
-        typeof title !== "string" ||
-        typeof content !== "string" ||
-        typeof name !== "string" ||
-        typeof description !== "string"
-      ) {
-        return createError(400, "Invalid type of input");
-      }
-  
-      /* req.file or req.files handling */
-      const images = req.files || (req.file ? [req.file] : []); // Handle both cases
-  
-      let imagesUrl = await Promise.all(
-        images.map(async (image) => {
-          let result = await cloudinary.uploader.upload(image.path, {
-            resource_type: "image",
-          });
-          fs.unlink(image.path, (err) => {
-            if (err) console.error("Failed to delete temp file:", err);
-          });
-          return result.secure_url; // Return only secure URLs
-        })
-      );
-  
-      if (imagesUrl.length === 1) {
-        imagesUrl = imagesUrl[0]; // Return a single URL if only one image
-      }
-  
-      /* Check Place in database */
-      const havePlace = await prisma.place.findFirst({
-        where: { name },
-      });
-  
-      if (havePlace) {
-        const newPost = await prisma.post.create({
-          data: {
-            images: {
-              create: Array.isArray(imagesUrl)
-                ? imagesUrl.map((url) => ({ url }))
-                : [{ url: imagesUrl }],
-            },
-            placeId: havePlace.id,
-            userId: userId,
-            title: title,
-            content: content,
-            budget: +budget,
-          },
-        });
-        return res.json({ message: "create post", newPost });
-      } else {
-        const newPlace = await prisma.place.create({
-          data: {
-            name,
-            description,
-            latitude: +latitude,
-            longitude: +longitude,
-            provinceId: +provinceId,
-            districtId: +districtId,
-          },
-        });
-  
-        const newPost = await prisma.post.create({
-          data: {
-            images: {
-              create: Array.isArray(imagesUrl)
-                ? imagesUrl.map((url) => ({ url }))
-                : [{ url: imagesUrl }],
-            },
-            placeId: newPlace.id,
-            userId: userId,
-            title: title,
-            content: content,
-            budget: +budget,
-          },
-        });
-        return res.json({ message: "create post and add new place", newPost });
-      }
-    } catch (error) {
-      next(error);
+  try {
+    /* req.body */
+    const {
+      title,
+      content,
+      budget,
+      name,
+      description,
+      latitude,
+      longitude,
+      provinceId,
+      districtId,
+    } = req.body;
+
+    const userId = req.user.id;
+
+    // Validate inputs
+    if (
+      !title.trim() ||
+      !content.trim() ||
+      !budget ||
+      !name ||
+      !description ||
+      !latitude ||
+      !longitude ||
+      !provinceId ||
+      !districtId
+    ) {
+      return createError(400, "Missing some inputs");
     }
-  };
-  
+
+    if (
+      isNaN(latitude) ||
+      isNaN(longitude) ||
+      isNaN(provinceId) ||
+      isNaN(districtId) ||
+      isNaN(budget)
+    ) {
+      return createError(400, "Invalid number");
+    }
+
+    if (
+      typeof title !== "string" ||
+      typeof content !== "string" ||
+      typeof name !== "string" ||
+      typeof description !== "string"
+    ) {
+      return createError(400, "Invalid type of input");
+    }
+
+    /* req.file or req.files handling */
+    const images = req.files || (req.file ? [req.file] : []); // Handle both cases
+
+    let imagesUrl = await Promise.all(
+      images.map(async (image) => {
+        let result = await cloudinary.uploader.upload(image.path, {
+          resource_type: "image",
+        });
+        fs.unlink(image.path, (err) => {
+          if (err) console.error("Failed to delete temp file:", err);
+        });
+        return result.secure_url; // Return only secure URLs
+      })
+    );
+
+    if (imagesUrl.length === 1) {
+      imagesUrl = imagesUrl[0]; // Return a single URL if only one image
+    }
+
+    /* Check Place in database */
+    const havePlace = await prisma.place.findFirst({
+      where: { name },
+    });
+
+    if (havePlace) {
+      const newPost = await prisma.post.create({
+        data: {
+          images: {
+            create: Array.isArray(imagesUrl)
+              ? imagesUrl.map((url) => ({ url }))
+              : [{ url: imagesUrl }],
+          },
+          placeId: havePlace.id,
+          userId: userId,
+          title: title,
+          content: content,
+          budget: +budget,
+        },
+      });
+      return res.json({ message: "create post", newPost });
+    } else {
+      const newPlace = await prisma.place.create({
+        data: {
+          name,
+          description,
+          latitude: +latitude,
+          longitude: +longitude,
+          provinceId: +provinceId,
+          districtId: +districtId,
+        },
+      });
+
+      const newPost = await prisma.post.create({
+        data: {
+          images: {
+            create: Array.isArray(imagesUrl)
+              ? imagesUrl.map((url) => ({ url }))
+              : [{ url: imagesUrl }],
+          },
+          placeId: newPlace.id,
+          userId: userId,
+          title: title,
+          content: content,
+          budget: +budget,
+        },
+      });
+      return res.json({ message: "create post and add new place", newPost });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 
 postController.getAllPosts = async (req, res, next) => {
   try {
@@ -199,6 +198,11 @@ postController.getPostFromPostId = async (req, res, next) => {
           include: {
             province: true,
             district: true,
+          },
+        },
+        user: {
+          omit: {
+            password: true,
           },
         },
       },
