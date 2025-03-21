@@ -95,6 +95,10 @@ wishlistController.getAllWishlists = async (req, res, next) => {
       },
     });
 
+    // let images = []
+    // for (let el of )
+    // const images = await prisma.postImage.findFirst
+
     //Get total count
     const totalWishlists = await prisma.wishlist.count();
     const totalPages = Math.ceil(totalWishlists / pageSize);
