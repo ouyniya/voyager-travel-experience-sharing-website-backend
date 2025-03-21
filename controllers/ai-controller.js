@@ -43,12 +43,12 @@ const aiChat = async (req, res, next) => {
         <h2>Trip Option 1</h2>
         <p class="trip-description">Short trip description.</p>
         <h3>Day 1</h3> 
-        <p class="activity1">Activity1 description ... cost THB</p>
-         <p class="activity2">Activity2 description ... cost THB</p>
+        <p class="activity1">Activity1 description ... cost THB or free</p>
+         <p class="activity2">Activity2 description ... cost THB or free</p>
         <br>
         <h3>Day 2</h3> 
-        <p class="activity3">Activity3 description ... cost THB</p>
-        <p class="activity4">Activity4 description ... cost THB</p>
+        <p class="activity3">Activity3 description ... cost THB or free</p>
+        <p class="activity4">Activity4 description ... cost THB or free</p>
         <br>
         <h3>Conclusion</h3> 
         <p class="total-spend">Total Spend: <span class="spend">XXX THB</span></p>
