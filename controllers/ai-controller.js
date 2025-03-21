@@ -50,13 +50,19 @@ const aiChat = async (req, res, next) => {
         <p class="activity3">Activity3 description ... cost THB or free</p>
         <p class="activity4">Activity4 description ... cost THB or free</p>
         <br>
+        <h3>Day 3</h3> 
+        <p class="activity4">Activity5 description ... cost THB or free</p>
+        <p class="activity5">Activity5 description ... cost THB or free</p>
+        <br>
         <h3>Conclusion</h3> 
         <p class="total-spend">Total Spend: <span class="spend">XXX THB</span></p>
         <p class="remaining-budget">Remaining Budget: <span class="budget">XXX THB</span></p>
       </div>
     - **Make border line every option in dark blur color.
     - **Remove all bullet points.**
-    - **Trip Option 1,2 and 3 should show in different colors
+    - **Trip Option 1 background color is light blue
+    - **Trip Option 2 background color is light green
+    - **Trip Option 3 background color is light orange
     - **Cost THB should be at the right side adjust it same position all line
     - **If cost = 0 THB show "free" text instead of 0 THB and green text"
     - **Make "Trip Option" header larger and more stylish.**
