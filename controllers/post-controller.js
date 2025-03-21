@@ -129,28 +129,6 @@ postController.createPost = async (req, res, next) => {
   }
 };
 
-
-// postController.getAllPosts = async (req, res, next) => {
-//   try {
-//     const post = await prisma.post.findMany({
-//       select: {
-//         id: true,
-//         userId: true,
-//         placeId: true,
-//         title: true,
-//         content: true,
-//         budget: true,
-//         view: true,
-//         images: true,
-//       },
-//     });
-
-//     res.json({ message: "getAllPosts", post });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 postController.getAllPosts = async (req, res, next) => {
   try {
     const posts = await prisma.post.findMany({
@@ -258,11 +236,7 @@ postController.updatePost = async (req, res, next) => {
     /* req.params */
     const { id } = req.params;
     /* req.body */
-    const {
-      title,
-      content,
-      budget
-    } = req.body;
+    const { title, content, budget } = req.body;
 
     /* req.user */
     const userId = req.user.id;
@@ -271,12 +245,12 @@ postController.updatePost = async (req, res, next) => {
     const havePost = await prisma.post.findFirst({
       where: {
         id: +id,
-        userId: +userId
-      }
-    })
+        userId: +userId,
+      },
+    });
 
     /* update */
-    if (havePost){
+    if (havePost) {
       const updatePost = await prisma.post.update({
         where: {
           id: +id,
@@ -285,13 +259,12 @@ postController.updatePost = async (req, res, next) => {
           title: title,
           content: content,
           budget: +budget,
-        }
-      })
-      return res.json({ message: "Update post success", updatePost })
-    }else {
-      return createError(400, "No post found")
+        },
+      });
+      return res.json({ message: "Update post success", updatePost });
+    } else {
+      return createError(400, "No post found");
     }
-    
   } catch (error) {
     next(error);
   }
@@ -305,11 +278,39 @@ postController.deletePost = async (req, res, next) => {
     /* req.user */
     const userId = req.user.id;
 
+    // validate
+    if (isNaN(id) || isNaN(userId)) {
+      return createError(400, "Post id or User id is invalid");
+    }
+
+    const isPostExist = await prisma.post.findFirst({
+      where: {
+        id: +id,
+      },
+    });
+
+    if (!isPostExist) {
+      return createError(404, "No post found");
+    }
+
+    const isAuthorized = await prisma.post.findFirst({
+      where: {
+        id: +id,
+        userId: +userId,
+      },
+    });
+
+    if (!isAuthorized) {
+      return createError(400, "Forbidden, you cannot delete this post");
+    }
+
+    // delete
     const deleted = await prisma.post.delete({
       where: {
         id: +id,
       },
     });
+
     res.json({ message: `post id: ${id} has been deleted.`, deleted });
   } catch (error) {
     next(error);
