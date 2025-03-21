@@ -129,6 +129,7 @@ postController.createPost = async (req, res, next) => {
   }
 };
 
+
 postController.getAllPosts = async (req, res, next) => {
   try {
     const post = await prisma.post.findMany({
@@ -225,30 +226,26 @@ postController.updatePost = async (req, res, next) => {
     /* req.params */
     const { id } = req.params;
     /* req.body */
-    const { title, content, place, budget } = req.body;
-    // const placeName = place.name
+    const {
+      title,
+      content,
+      budget
+    } = req.body;
 
     /* req.user */
     const userId = req.user.id;
 
-    /* find place */
-    const havePlace = await prisma.place.findFirst({
+    /* find post */
+    const havePost = await prisma.post.findFirst({
       where: {
-        name: place.name,
-      },
-    });
+        id: +id,
+        userId: +userId
+      }
+    })
 
-    /* check place */
-    if (havePlace) {
-      /* find post */
-      const havePost = await prisma.post.findFirst({
-        where: {
-          id: +id,
-        },
-      });
-
-      /* update */
-      const post = await prisma.post.update({
+    /* update */
+    if (havePost){
+      const updatePost = await prisma.post.update({
         where: {
           id: +id,
         },
@@ -256,47 +253,13 @@ postController.updatePost = async (req, res, next) => {
           title: title,
           content: content,
           budget: +budget,
-          placeId: havePlace.id,
-        },
-      });
-
-      return res.json({ message: "Update role success", post });
-    } else {
-      const newPlace = await prisma.place.create({
-        data: {
-          name: place.name,
-          description: place.description,
-          latitude: +place.latitude,
-          longitude: +place.longitude,
-          provinceId: +place.provinceId,
-          districtId: +place.districtId,
-        },
-      });
-      /* find post */
-      const havePost = await prisma.post.findFirst({
-        where: {
-          id: +id,
-        },
-      });
-
-      /* update */
-      const post = await prisma.post.update({
-        where: {
-          id: +id,
-        },
-        data: {
-          title: title,
-          content: content,
-          budget: +budget,
-          placeId: newPlace.id,
-        },
-      });
-      console.log("post update");
-      console.log(post);
-
-      return res.json({ message: "Update role success", post });
-      // return res.json({ message: "place not found" })
+        }
+      })
+      return res.json({ message: "Update post success", updatePost })
+    }else {
+      return createError(400, "No post found")
     }
+    
   } catch (error) {
     next(error);
   }
