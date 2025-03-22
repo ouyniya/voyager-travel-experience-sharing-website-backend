@@ -130,22 +130,53 @@ postController.createPost = async (req, res, next) => {
 };
 
 
+// postController.getAllPosts = async (req, res, next) => {
+//   try {
+//     const post = await prisma.post.findMany({
+//       select: {
+//         id: true,
+//         userId: true,
+//         placeId: true,
+//         title: true,
+//         content: true,
+//         budget: true,
+//         view: true,
+//         images: true,
+//       },
+//     });
+
+//     res.json({ message: "getAllPosts", post });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 postController.getAllPosts = async (req, res, next) => {
   try {
-    const post = await prisma.post.findMany({
-      select: {
-        id: true,
-        userId: true,
-        placeId: true,
-        title: true,
-        content: true,
-        budget: true,
-        view: true,
+    const posts = await prisma.post.findMany({
+      include: {
         images: true,
+        place: {
+          include: {
+            province: true,
+            district: true,
+          },
+        },
       },
     });
 
-    res.json({ message: "getAllPosts", post });
+    const formattedPosts = posts.map((post) => ({
+      id: post.id,
+      placeName: post.place.name,
+      latitude: post.place.latitude,
+      longitude: post.place.longitude,
+      description: post.place.description,
+      province: post.place.province.name,
+      district: post.place.district.name,
+      image: post.images.length > 0 ? post.images[0].url : null,
+    }));
+
+    res.json({ message: "getAllPosts", posts: formattedPosts });
   } catch (error) {
     next(error);
   }

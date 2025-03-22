@@ -812,8 +812,15 @@ const postData = [
     budget: 313,
     view: 9433,
   },
-
-
+  {
+    id: 87,
+    userId: 5,
+    placeId: 87,
+    title: "Meeting Moo Deng, the cutest hippo at Khao Kheow!",
+    content: "Visiting Moo Deng at Khao Kheow Open Zoo was an unforgettable experience. She was playful, adorable, and her rosy cheeks were even cuter in person. It's clear why she's become so popular—seeing her splash around brought genuine joy. Highly recommend for families and animal lovers!",
+    budget: 450,
+    view: 12500,
+  }
 
 ];
 
@@ -1595,6 +1602,15 @@ const placeData = [
     provinceId: 44,
     districtId: 583,
   },
+  {
+    id: 87,
+    name: "Moo Deng, Khao Kheow Open Zoo",
+    description: "The beloved pygmy hippopotamus known for her playful antics, viral fame, and rosy cheeks, attracting visitors worldwide.",
+    latitude: 13.216356,
+    longitude: 101.056460,
+    provinceId: 11, // Chonburi
+    districtId: 137  // Si Racha
+}
 
 ];
 
