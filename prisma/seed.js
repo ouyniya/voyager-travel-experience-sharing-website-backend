@@ -46,8 +46,8 @@ const postData = [
     content: "My adventure to Wat Phra Kaew (Temple of the Emerald Buddha) was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 316,
     view: 6390,
-},
-{
+  },
+  {
     id: 2,
     userId: 4,
     placeId: 2,
@@ -55,8 +55,8 @@ const postData = [
     content: "During my visit to Ancient City (Muang Boran), I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1129,
     view: 6734,
-},
-{
+  },
+  {
     id: 3,
     userId: 3,
     placeId: 3,
@@ -64,8 +64,8 @@ const postData = [
     content: "During my visit to Wat Phra Si Rattana Satsadaram (Wat Yai), I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1090,
     view: 5426,
-},
-{
+  },
+  {
     id: 4,
     userId: 4,
     placeId: 4,
@@ -73,8 +73,8 @@ const postData = [
     content: "My adventure to Wat Phra Dhammakaya was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 426,
     view: 9322,
-},
-{
+  },
+  {
     id: 5,
     userId: 3,
     placeId: 5,
@@ -82,8 +82,8 @@ const postData = [
     content: "Visiting Wat Yai Chaimongkol was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 692,
     view: 7949,
-},
-{
+  },
+  {
     id: 6,
     userId: 3,
     placeId: 6,
@@ -91,8 +91,8 @@ const postData = [
     content: "During my visit to Wat Muang, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 940,
     view: 5555,
-},
-{
+  },
+  {
     id: 7,
     userId: 3,
     placeId: 7,
@@ -100,8 +100,8 @@ const postData = [
     content: "Visiting Phra Prang Sam Yot was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 357,
     view: 7396,
-},
-{
+  },
+  {
     id: 8,
     userId: 5,
     placeId: 8,
@@ -109,8 +109,8 @@ const postData = [
     content: "My adventure to Wat Phra Non Chakkrasi Worawihan was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 933,
     view: 9666,
-},
-{
+  },
+  {
     id: 9,
     userId: 4,
     placeId: 9,
@@ -118,8 +118,8 @@ const postData = [
     content: "Visiting Chai Nat Bird Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 812,
     view: 8849,
-},
-{
+  },
+  {
     id: 10,
     userId: 5,
     placeId: 10,
@@ -127,8 +127,8 @@ const postData = [
     content: "Phra Phutthabat Woramahawihan exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 1050,
     view: 1189,
-},
-{
+  },
+  {
     id: 11,
     userId: 3,
     placeId: 11,
@@ -136,8 +136,8 @@ const postData = [
     content: "During my visit to Pattaya Beach, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1301,
     view: 4005,
-},
-{
+  },
+  {
     id: 12,
     userId: 4,
     placeId: 12,
@@ -145,8 +145,8 @@ const postData = [
     content: "Suan Son Beach offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 1619,
     view: 8734,
-},
-{
+  },
+  {
     id: 13,
     userId: 5,
     placeId: 13,
@@ -154,8 +154,8 @@ const postData = [
     content: "Namtok Phlio National Park offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 1441,
     view: 4556,
-},
-{
+  },
+  {
     id: 14,
     userId: 4,
     placeId: 14,
@@ -163,8 +163,8 @@ const postData = [
     content: "During my visit to Ko Chang, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 859,
     view: 6393,
-},
-{
+  },
+  {
     id: 15,
     userId: 5,
     placeId: 15,
@@ -172,8 +172,8 @@ const postData = [
     content: "Visiting Wat Sothonwararam Worawihan was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 900,
     view: 9433,
-},
-{
+  },
+  {
     id: 16,
     userId: 3,
     placeId: 16,
@@ -181,8 +181,8 @@ const postData = [
     content: "Visiting Khao Yai National Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 787,
     view: 8513,
-},
-{
+  },
+  {
     id: 17,
     userId: 2,
     placeId: 17,
@@ -190,8 +190,8 @@ const postData = [
     content: "Visiting Sarika Waterfall was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 536,
     view: 7235,
-},
-{
+  },
+  {
     id: 18,
     userId: 4,
     placeId: 18,
@@ -199,8 +199,8 @@ const postData = [
     content: "During my visit to Aranyaprathet Border Market, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 571,
     view: 1775,
-},
-{
+  },
+  {
     id: 19,
     userId: 4,
     placeId: 19,
@@ -208,8 +208,8 @@ const postData = [
     content: "During my visit to Wat Phra That Phanom, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 488,
     view: 4152,
-},
-{
+  },
+  {
     id: 20,
     userId: 5,
     placeId: 20,
@@ -217,8 +217,8 @@ const postData = [
     content: "My adventure to Phanom Rung Historical Park was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 1103,
     view: 4943,
-},
-{
+  },
+  {
     id: 21,
     userId: 5,
     placeId: 21,
@@ -226,8 +226,8 @@ const postData = [
     content: "Prasat Hin Phimai offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 746,
     view: 2021,
-},
-{
+  },
+  {
     id: 22,
     userId: 3,
     placeId: 22,
@@ -235,8 +235,8 @@ const postData = [
     content: "Visiting Preah Vihear National Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 880,
     view: 4843,
-},
-{
+  },
+  {
     id: 23,
     userId: 3,
     placeId: 23,
@@ -244,8 +244,8 @@ const postData = [
     content: "Visiting Sam Phan Bok was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 1089,
     view: 7873,
-},
-{
+  },
+  {
     id: 24,
     userId: 5,
     placeId: 24,
@@ -253,8 +253,8 @@ const postData = [
     content: "Wat Phra That Kong Khao Noi exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 1160,
     view: 5297,
-},
-{
+  },
+  {
     id: 25,
     userId: 3,
     placeId: 25,
@@ -262,8 +262,8 @@ const postData = [
     content: "Tat Ton National Park offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 546,
     view: 8629,
-},
-{
+  },
+  {
     id: 26,
     userId: 4,
     placeId: 26,
@@ -271,8 +271,8 @@ const postData = [
     content: "During my visit to Phu Pha Yon National Park, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1399,
     view: 2016,
-},
-{
+  },
+  {
     id: 27,
     userId: 3,
     placeId: 27,
@@ -280,8 +280,8 @@ const postData = [
     content: "Phu Thok exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 453,
     view: 1878,
-},
-{
+  },
+  {
     id: 28,
     userId: 2,
     placeId: 28,
@@ -289,8 +289,8 @@ const postData = [
     content: "Phu Kradueng National Park offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 1296,
     view: 5859,
-},
-{
+  },
+  {
     id: 29,
     userId: 5,
     placeId: 29,
@@ -298,8 +298,8 @@ const postData = [
     content: "Phu Wiang Dinosaur Museum exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 285,
     view: 9684,
-},
-{
+  },
+  {
     id: 30,
     userId: 2,
     placeId: 30,
@@ -307,8 +307,8 @@ const postData = [
     content: "Visiting Red Lotus Lake (Nong Han Kumphawapi) was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 384,
     view: 1064,
-},
-{
+  },
+  {
     id: 31,
     userId: 2,
     placeId: 31,
@@ -316,8 +316,8 @@ const postData = [
     content: "Phu Ruea National Park exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 1392,
     view: 6463,
-},
-{
+  },
+  {
     id: 32,
     userId: 2,
     placeId: 32,
@@ -325,8 +325,8 @@ const postData = [
     content: "Visiting Wat Pho Chai was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 346,
     view: 3695,
-},
-{
+  },
+  {
     id: 33,
     userId: 5,
     placeId: 33,
@@ -334,8 +334,8 @@ const postData = [
     content: "During my visit to Khao Yai National Park (Maha Sarakham Side), I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1308,
     view: 6892,
-},
-{
+  },
+  {
     id: 34,
     userId: 3,
     placeId: 34,
@@ -343,8 +343,8 @@ const postData = [
     content: "Visiting Bueng Phalan Chai was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 393,
     view: 7184,
-},
-{
+  },
+  {
     id: 35,
     userId: 5,
     placeId: 35,
@@ -352,8 +352,8 @@ const postData = [
     content: "Lam Pao Dam offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 1049,
     view: 4104,
-},
-{
+  },
+  {
     id: 36,
     userId: 5,
     placeId: 36,
@@ -361,8 +361,8 @@ const postData = [
     content: "Phu Phan National Park exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 1257,
     view: 9996,
-},
-{
+  },
+  {
     id: 37,
     userId: 4,
     placeId: 37,
@@ -370,8 +370,8 @@ const postData = [
     content: "Phra That Phanom exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 752,
     view: 9154,
-},
-{
+  },
+  {
     id: 38,
     userId: 4,
     placeId: 38,
@@ -379,8 +379,8 @@ const postData = [
     content: "Wat Phu Dan Tae exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 503,
     view: 4840,
-},
-{
+  },
+  {
     id: 39,
     userId: 2,
     placeId: 39,
@@ -388,8 +388,8 @@ const postData = [
     content: "Visiting Doi Inthanon National Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 1211,
     view: 7910,
-},
-{
+  },
+  {
     id: 40,
     userId: 3,
     placeId: 40,
@@ -397,8 +397,8 @@ const postData = [
     content: "Visiting Wat Phra That Hariphunchai was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 517,
     view: 7938,
-},
-{
+  },
+  {
     id: 41,
     userId: 2,
     placeId: 41,
@@ -406,8 +406,8 @@ const postData = [
     content: "During my visit to Wat Phra That Lampang Luang, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 773,
     view: 6134,
-},
-{
+  },
+  {
     id: 42,
     userId: 3,
     placeId: 42,
@@ -415,8 +415,8 @@ const postData = [
     content: "My adventure to Sirikit Dam was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 731,
     view: 8858,
-},
-{
+  },
+  {
     id: 43,
     userId: 4,
     placeId: 43,
@@ -424,8 +424,8 @@ const postData = [
     content: "My adventure to Phrae Muang Phi Forest Park was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 640,
     view: 3790,
-},
-{
+  },
+  {
     id: 44,
     userId: 2,
     placeId: 44,
@@ -433,8 +433,8 @@ const postData = [
     content: "My adventure to Doi Phu Kha National Park was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 850,
     view: 6116,
-},
-{
+  },
+  {
     id: 45,
     userId: 5,
     placeId: 45,
@@ -442,8 +442,8 @@ const postData = [
     content: "My adventure to Phayao Lake was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 299,
     view: 8574,
-},
-{
+  },
+  {
     id: 46,
     userId: 4,
     placeId: 46,
@@ -451,8 +451,8 @@ const postData = [
     content: "My adventure to Wat Rong Khun (White Temple) was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 488,
     view: 4242,
-},
-{
+  },
+  {
     id: 47,
     userId: 2,
     placeId: 47,
@@ -460,8 +460,8 @@ const postData = [
     content: "My adventure to Pai Canyon was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 553,
     view: 7668,
-},
-{
+  },
+  {
     id: 48,
     userId: 5,
     placeId: 48,
@@ -469,8 +469,8 @@ const postData = [
     content: "During my visit to Bueng Boraphet, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1033,
     view: 4157,
-},
-{
+  },
+  {
     id: 49,
     userId: 5,
     placeId: 49,
@@ -478,8 +478,8 @@ const postData = [
     content: "During my visit to Huai Kha Khaeng Wildlife Sanctuary, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 756,
     view: 3693,
-},
-{
+  },
+  {
     id: 50,
     userId: 5,
     placeId: 50,
@@ -487,8 +487,8 @@ const postData = [
     content: "Kamphaeng Phet Historical Park offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 422,
     view: 6450,
-},
-{
+  },
+  {
     id: 51,
     userId: 5,
     placeId: 51,
@@ -496,8 +496,8 @@ const postData = [
     content: "Mae Sot Border Market exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 821,
     view: 6592,
-},
-{
+  },
+  {
     id: 52,
     userId: 4,
     placeId: 52,
@@ -505,8 +505,8 @@ const postData = [
     content: "My adventure to Sukhothai Historical Park was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 1157,
     view: 8392,
-},
-{
+  },
+  {
     id: 53,
     userId: 2,
     placeId: 53,
@@ -514,8 +514,8 @@ const postData = [
     content: "My adventure to Phitsanulok Railway Station was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 424,
     view: 7776,
-},
-{
+  },
+  {
     id: 54,
     userId: 5,
     placeId: 54,
@@ -523,8 +523,8 @@ const postData = [
     content: "Wat Tha Luang exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 399,
     view: 8526,
-},
-{
+  },
+  {
     id: 55,
     userId: 3,
     placeId: 55,
@@ -532,8 +532,8 @@ const postData = [
     content: "During my visit to Khao Kho National Park, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1101,
     view: 4748,
-},
-{
+  },
+  {
     id: 56,
     userId: 2,
     placeId: 56,
@@ -541,8 +541,8 @@ const postData = [
     content: "Damnoen Saduak Floating Market exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 479,
     view: 2998,
-},
-{
+  },
+  {
     id: 57,
     userId: 4,
     placeId: 57,
@@ -550,8 +550,8 @@ const postData = [
     content: "During my visit to Erawan National Park, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1061,
     view: 2495,
-},
-{
+  },
+  {
     id: 58,
     userId: 2,
     placeId: 58,
@@ -559,8 +559,8 @@ const postData = [
     content: "Visiting Wat Pa Lelai Worawihan was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 958,
     view: 6232,
-},
-{
+  },
+  {
     id: 59,
     userId: 3,
     placeId: 59,
@@ -568,8 +568,8 @@ const postData = [
     content: "Visiting Phutthamonthon was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 741,
     view: 4581,
-},
-{
+  },
+  {
     id: 60,
     userId: 4,
     placeId: 60,
@@ -577,8 +577,8 @@ const postData = [
     content: "My adventure to Wat Chong Lom was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 907,
     view: 8554,
-},
-{
+  },
+  {
     id: 61,
     userId: 2,
     placeId: 61,
@@ -586,8 +586,8 @@ const postData = [
     content: "Amphawa Floating Market offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 624,
     view: 4696,
-},
-{
+  },
+  {
     id: 62,
     userId: 5,
     placeId: 62,
@@ -595,8 +595,8 @@ const postData = [
     content: "My adventure to Cha-Am Beach was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 1015,
     view: 1698,
-},
-{
+  },
+  {
     id: 63,
     userId: 2,
     placeId: 63,
@@ -604,8 +604,8 @@ const postData = [
     content: "My adventure to Hua Hin Beach was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 1539,
     view: 5737,
-},
-{
+  },
+  {
     id: 64,
     userId: 5,
     placeId: 64,
@@ -613,8 +613,8 @@ const postData = [
     content: "During my visit to Khao Luang National Park, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1091,
     view: 9164,
-},
-{
+  },
+  {
     id: 65,
     userId: 5,
     placeId: 65,
@@ -622,8 +622,8 @@ const postData = [
     content: "My adventure to Railay Beach was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 835,
     view: 6249,
-},
-{
+  },
+  {
     id: 66,
     userId: 2,
     placeId: 66,
@@ -631,8 +631,8 @@ const postData = [
     content: "Similan Islands National Park offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 557,
     view: 6791,
-},
-{
+  },
+  {
     id: 67,
     userId: 3,
     placeId: 67,
@@ -640,8 +640,8 @@ const postData = [
     content: "During my visit to Phuket Old Town, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 996,
     view: 1202,
-},
-{
+  },
+  {
     id: 68,
     userId: 5,
     placeId: 68,
@@ -649,8 +649,8 @@ const postData = [
     content: "Ko Samui exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 1195,
     view: 9958,
-},
-{
+  },
+  {
     id: 69,
     userId: 3,
     placeId: 69,
@@ -658,8 +658,8 @@ const postData = [
     content: "Visiting Ko Surin National Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 459,
     view: 9004,
-},
-{
+  },
+  {
     id: 70,
     userId: 5,
     placeId: 70,
@@ -667,8 +667,8 @@ const postData = [
     content: "Chumphon National Park exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
     budget: 1151,
     view: 8125,
-},
-{
+  },
+  {
     id: 71,
     userId: 4,
     placeId: 71,
@@ -676,8 +676,8 @@ const postData = [
     content: "Hat Yai Municipal Park offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 963,
     view: 7287,
-},
-{
+  },
+  {
     id: 72,
     userId: 2,
     placeId: 72,
@@ -685,8 +685,8 @@ const postData = [
     content: "Visiting Tarutao National Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 989,
     view: 5282,
-},
-{
+  },
+  {
     id: 73,
     userId: 3,
     placeId: 73,
@@ -694,8 +694,8 @@ const postData = [
     content: "Visiting Hat Chao Mai National Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 679,
     view: 1659,
-},
-{
+  },
+  {
     id: 74,
     userId: 5,
     placeId: 74,
@@ -703,8 +703,8 @@ const postData = [
     content: "Thale Noi Waterbird Park offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 844,
     view: 2986,
-},
-{
+  },
+  {
     id: 75,
     userId: 4,
     placeId: 75,
@@ -712,8 +712,8 @@ const postData = [
     content: "Kru Se Mosque offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 566,
     view: 3911,
-},
-{
+  },
+  {
     id: 76,
     userId: 4,
     placeId: 76,
@@ -721,8 +721,8 @@ const postData = [
     content: "My adventure to Betong was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 990,
     view: 9680,
-},
-{
+  },
+  {
     id: 77,
     userId: 2,
     placeId: 77,
@@ -730,13 +730,95 @@ const postData = [
     content: "My adventure to Narathiwat was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 726,
     view: 6759,
-},
+  },
+  {
+    id: 78,
+    userId: 2,
+    placeId: 78,
+    title: "Stunning views at Doi Phu Kha National Park.",
+    content: "Visiting Doi Phu Kha National Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
+    budget: 1430,
+    view: 6191,
+  },
+  {
+    id: 79,
+    userId: 4,
+    placeId: 79,
+    title: "My adventurous trip to Wat Phra That Khao Noi.",
+    content: "My adventure to Wat Phra That Khao Noi was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
+    budget: 514,
+    view: 5426,
+  },
+  {
+    id: 80,
+    userId: 5,
+    placeId: 80,
+    title: "Remarkable experiences at Sin Thao Rock Salt Pond.",
+    content: "Sin Thao Rock Salt Pond exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
+    budget: 1171,
+    view: 9322,
+  },
+  {
+    id: 81,
+    userId: 3,
+    placeId: 81,
+    title: "Discovering the charm of Wat Phra That Chae Haeng.",
+    content: "Wat Phra That Chae Haeng exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
+    budget: 643,
+    view: 7949,
+  },
+  {
+    id: 82,
+    userId: 2,
+    placeId: 82,
+    title: "Unforgettable journey to Doi Phu Wae National Park.",
+    content: "Visiting Doi Phu Wae National Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
+    budget: 1484,
+    view: 5555,
+  },
+  {
+    id: 83,
+    userId: 5,
+    placeId: 83,
+    title: "Captivating moments at Tambon Silapetch Farmstay Farmerschool.",
+    content: "Tambon Silapetch Farmstay Farmerschool exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
+    budget: 1156,
+    view: 9666,
+  },
+  {
+    id: 84,
+    userId: 4,
+    placeId: 84,
+    title: "A delightful day at Doi Samer Dao National Park.",
+    content: "Visiting Doi Samer Dao National Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
+    budget: 1131,
+    view: 2528,
+  },
+  {
+    id: 85,
+    userId: 4,
+    placeId: 85,
+    title: "A delightful day at Phu Fa Pattana (Development) Center Accommodation.",
+    content: "Phu Fa Pattana (Development) Center Accommodation exceeded my expectations! I was fascinated by the unique blend of history and natural beauty. The experience was enriching and highly enjoyable. Definitely a memorable visit!",
+    budget: 946,
+    view: 6393,
+  },
+  {
+    id: 86,
+    userId: 5,
+    placeId: 86,
+    title: "A peaceful visit to Walking Street, Wat Phumin.",
+    content: "During my visit to Walking Street, Wat Phumin, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
+    budget: 313,
+    view: 9433,
+  },
+
 
 
 ];
 
 const placeData = [
- 
+
   {
     id: 1,
     name: "Wat Phra Kaew (Temple of the Emerald Buddha)",
@@ -935,7 +1017,7 @@ const placeData = [
     provinceId: 22,
     districtId: 273,
   },
- {
+  {
     id: 23,
     name: "Sam Phan Bok",
     description: "The 'Grand Canyon of Thailand' along the Mekong River in Ubon Ratchathani, known for its unique rock formations.",
@@ -1124,7 +1206,7 @@ const placeData = [
     provinceId: 43,
     districtId: 575,
   },
-{
+  {
     id: 44,
     name: "Doi Phu Kha National Park",
     description: "A national park in Nan, known for its scenic mountain views and diverse wildlife.",
@@ -1133,7 +1215,7 @@ const placeData = [
     provinceId: 44,
     districtId: 583,
   },
-{
+  {
     id: 45,
     name: "Phayao Lake",
     description: "A large freshwater lake in Phayao, offering scenic views and recreational activities.",
@@ -1331,7 +1413,7 @@ const placeData = [
     provinceId: 66,
     districtId: 813,
   },
-{
+  {
     id: 67,
     name: "Phuket Old Town",
     description: "A historic district in Phuket, known for its Sino-Portuguese architecture and colorful buildings.",
@@ -1429,6 +1511,89 @@ const placeData = [
     longitude: 101.8167,
     provinceId: 77,
     districtId: 916,
+  },
+  {
+    id: 78,
+    name: "Doi Phu Kha National Park (Alternate Viewpoint)",
+    description: "Stunning nature, pink blossoms in February, campsite.",
+    latitude: 19.200560,
+    longitude: 101.080650,
+    provinceId: 44,
+    districtId: 583,
+  },
+  {
+    id: 79,
+    name: "Wat Phra That Khao Noi",
+    description: "Gold icon of a walking Buddha, The 15th-century temple, Sunset-viewing spot",
+    latitude: 18.769818,
+    longitude: 100.750495,
+    provinceId: 44,
+    districtId: 583,
+  },
+
+  {
+    id: 80,
+    name: "Sin Thao Rock Salt Pond",
+    description: "The only one rock salt pond in the world, The ancient rock salt pond",
+    latitude: 19.150311,
+    longitude: 101.154931,
+    provinceId: 44,
+    districtId: 594,
+
+  },
+  {
+    id: 81,
+    name: "Wat Phra That Chae Haeng",
+    description: "The Royal Temple of King Rama IX, The ancient lanna temple, Fascinating architecture",
+    latitude: 18.758243,
+    longitude: 100.791668,
+    provinceId: 44,
+    districtId: 596,
+  },
+  {
+    id: 82,
+    name: "Doi Phu Wae National Park",
+    description: "A land of majestic mountains and drifting mist., Unique local flora and rare plant species; Khor tree and the Dok Ku Lap Phan Pi (Thai Rose of the North)",
+    latitude: 19.385833,
+    longitude: 101.116667,
+    provinceId: 44,
+    districtId: 597,
+  },
+  {
+    id: 83,
+    name: "Tambon Silapetch Farmstay Farmerschool",
+    description: "A place to explore the art of rice cultivation through the hands-on wisdom of local villagers.",
+    latitude: 19.108200,
+    longitude: 100.943792,
+    provinceId: 44,
+    districtId: 587,
+  },
+  {
+    id: 84,
+    name: "Doi Samer Dao National Park",
+    description: "A popular camping site, Watching the stars at night, Watching the sea of mist at the sunrise",
+    latitude: 18.376333,
+    longitude: 100.827506,
+    provinceId: 44,
+    districtId: 586,
+  },
+  {
+    id: 85,
+    name: "Phu Fa Pattana (Development) Center Accommodation",
+    description: "A Royal Project of HRH Princess Maha Chakri Sirindhorn, A conservation-focused destination offering opportunities to experience natural wonders and immerse in local culture.",
+    latitude: 19.024851,
+    longitude: 101.205370,
+    provinceId: 44,
+    districtId: 594,
+  },
+  {
+    id: 86,
+    name: "Walking Street, Wat Phumin",
+    description:"A lively street lined with food stalls, everyday goods, clothing, and souvenirs.",
+    latitude: 18.775341,
+    longitude: 100.771599,
+    provinceId: 44,
+    districtId: 583,
   },
 
 ];
@@ -1726,6 +1891,16 @@ const postImageData = [
   { postId: 77, url: "https://picsum.photos/id/316/800/600" },
   { postId: 77, url: "https://picsum.photos/id/317/800/600" },
   { postId: 77, url: "https://picsum.photos/id/318/800/600" },
+  { postId: 78, url: "https://f.tpkcdn.com/images-720/690c782e46c6c4f26e947f659424dfa1.jpg" },
+  { postId: 79, url: "https://www.prd.go.th/th/file/get/file/20240904e5b90d2ecf4bfd01d36c1b36343ff015144711.jpg" },
+  { postId: 80, url: "https://img.wongnai.com/p/1920x0/2021/12/20/8fe0062008c940889982b07edf340048.jpg" },
+  { postId: 81, url: "https://www.matichonweekly.com/wp-content/uploads/2023/04/%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%B2%E0%B8%95%E0%B8%B8%E0%B9%81%E0%B8%8A%E0%B9%88%E0%B9%81%E0%B8%AB%E0%B9%89%E0%B8%87-cover-2227--1536x922.jpg" },
+  { postId: 82, url: "https://travel.mthai.com/app/uploads/2015/01/10599529_822619207794473_5549047632274721127_n.jpg" },
+  { postId: 83, url: "https://scontent.fbkk5-3.fna.fbcdn.net/v/t1.6435-9/73364256_146545126737094_5127476148606861312_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFfT1Nockrw2TtkPjp_D-mbh3MxfgETh6WHczF-AROHpZDNpWWtArYq8ANzbPolCVU&_nc_ohc=brYxinJ0ty8Q7kNvgFx8Uz2&_nc_oc=AdkHY5iZYMacejy8apcYISjPiCvjdsLwpgxNUnyj5IE6JUUl2s72Dl1X91JFzecpDB4&_nc_zt=23&_nc_ht=scontent.fbkk5-3.fna&_nc_gid=3VBgPBoJuV-EQke_58Qvgg&oh=00_AYEmFwjZN7kJU7S9U1dhtmn_CtdCRU00bauo8O7jbrZKeQ&oe=68047935" },
+  { postId: 84, url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/89/fb/36/caption.jpg?w=2000&h=-1&s=1" },
+  { postId: 85, url: "https://ak-d.tripcdn.com/images/1mk3u2234c2mi3ots4C26_C_1200_800_Q70.jpg?proc=source%2ftrip&proc=source%2ftrip" },
+  { postId: 86, url: "https://img.wongnai.com/p/1920x0/2023/01/07/25d994d81885413e959ec5948a317793.jpg" },
+
 ];
 
 
