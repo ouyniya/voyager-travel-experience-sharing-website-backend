@@ -1,10 +1,12 @@
 const express = require("express");
 const placeController = require("../controllers/place-controller.js");
 const router = express.Router();
-const authenticate = require("../")
+const authenticate = require("../middlewares/authenticate");
 
-router.post("/", authenticate, placeController.createPlace); // create places
-router.put("/:postId", authenticate, placeController,updatePlace); // Update Place
-router.delete("/:postId", authenticate, placeController.deletePlace); // delete place
+// Routes definitions
+// router.post("/", authenticate, placeController.createPlace);
+// router.put("/:postId", authenticate, placeController.updatePlace);
+// router.delete("/:postId", authenticate, placeController.deletePlace);
+router.get("/", placeController.getPlaces);
 
 module.exports = router;
