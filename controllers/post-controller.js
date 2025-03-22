@@ -173,6 +173,7 @@ postController.getAllPosts = async (req, res, next) => {
       description: post.place.description,
       province: post.place.province.name,
       district: post.place.district.name,
+      category: post.place.category || "default", // <- ✅ Include this line
       image: post.images.length > 0 ? post.images[0].url : null,
     }));
 
