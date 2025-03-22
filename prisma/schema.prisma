@@ -93,7 +93,7 @@ model PostImage {
   id     Int    @id @default(autoincrement())
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId Int
-  url    String
+  url    String @db.Text
 }
 
 model Wishlist {
