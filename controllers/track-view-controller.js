@@ -276,171 +276,150 @@ trackViewController.getTrackViewsByPlace = async (req, res, next) => {
   }
 };
 
-// trackViewController.getTopProvinces = async (req, res, next) => {
-//   try {
-//     // Fetch total views grouped by province
-//     const provinceViews = await prisma.post.groupBy({
-//       by: ["placeId"],
-//       _sum: { view: true },
-//       where: { placeId: { not: null } },
-//     });
-
-//     // Fetch place details to get province information
-//     const provinceData = await prisma.place.findMany({
-//       where: { id: { in: provinceViews.map((p) => p.placeId) } },
-//       select: { id: true, provinceId: true },
-//     });
-
-//     // Fetch province details
-//     const provinces = await prisma.province.findMany({
-//       where: { id: { in: provinceData.map((p) => p.provinceId) } },
-//       select: { id: true, name: true },
-//     });
-
-//     // Aggregate views by province
-//     const provinceTotals = {};
-//     provinceViews.forEach((p) => {
-//       const provinceId = provinceData.find(
-//         (pl) => pl.id === p.placeId
-//       )?.provinceId;
-//       if (provinceId) {
-//         provinceTotals[provinceId] =
-//           (provinceTotals[provinceId] || 0) + (p._sum.view || 0);
-//       }
-//     });
-
-//     // Sort provinces by views (desc) and take top 10
-//     const topProvinces = Object.keys(provinceTotals)
-//       .map((id) => ({
-//         id: Number(id),
-//         name:
-//           provinces.find((prov) => prov.id === Number(id))?.name || "Unknown",
-//         totalViews: provinceTotals[id],
-//       }))
-//       .sort((a, b) => b.totalViews - a.totalViews)
-//       .slice(0, 10);
-
-//     const topProvinceIds = topProvinces.map((p) => p.id);
-
-//     // Fetch one image for each province from its posts
-//     const provinceImages = await prisma.place.findMany({
-//       where: { provinceId: { in: topProvinceIds } },
-//       select: {
-//         provinceId: true,
-//         posts: {
-//           select: {
-//             images: {
-//               select: { url: true },
-//               take: 1, // Fetch only one image per province
-//             },
-//           },
-//           take: 1, // Fetch only one post per province
-//         },
-//       },
-//     });
-
-//     // Add images to top provinces
-//     const finalTopProvinces = topProvinces.map((province) => {
-//       const provinceImage = provinceImages.find(
-//         (p) => p.provinceId === province.id
-//       );
-//       return {
-//         ...province,
-//         image: provinceImage?.posts?.[0]?.images?.[0]?.url || null, // Get first image if available
-//       };
-//     });
-
-//     res.json({ topProvinces: finalTopProvinces });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 trackViewController.getTopProvinces = async (req, res, next) => {
+  console.log('*********')
   try {
-    // Fetch total views grouped by placeId
-    const provinceViews = await prisma.view.groupBy({
-      by: ["postId"], // Group by postId
-      _sum: { views: true }, // Sum views
-      where: {
-        postId: { not: null }, // Ensure postId is not null
+    // Fetch total views for each place
+    const placeViews = await prisma.post.groupBy({
+      by: ["placeId"],
+      _sum: { view: true },
+      where: { placeId: { not: null } },
+    });
+
+    // Sort places by total views in descending order and limit to top 10
+    const sortedTopPlaces = placeViews
+      .sort((a, b) => (b._sum.view || 0) - (a._sum.view || 0))
+      .slice(0, 10);
+
+    const placeIds = sortedTopPlaces.map((p) => p.placeId);
+
+    // Fetch place details with province and district
+    const places = await prisma.place.findMany({
+      where: { id: { in: placeIds } },
+      select: {
+        id: true,
+        name: true,
+        district: {
+          select: {
+            id: true,
+            name: true,
+            province: { select: { id: true, name: true } },
+          },
+        },
       },
     });
 
-    if (!provinceViews.length) {
-      return res.json({ topProvinces: [] });
-    }
-
-    // Fetch place details using postIds
-    const postIds = provinceViews.map((p) => p.postId);
-    const provinceData = await prisma.post.findMany({
-      where: { id: { in: postIds } },
-      select: { id: true, placeId: true },
+    // Construct place results
+    const topPlacesResult = sortedTopPlaces.map((p) => {
+      const place = places.find((place) => place.id === p.placeId);
+      return {
+        id: p.placeId,
+        name: place?.name || "Unknown",
+        totalViews: p._sum.view || 0,
+        district: place?.district?.name || "Unknown",
+        province: place?.district?.province?.name || "Unknown",
+      };
     });
 
-    const placeIds = provinceData.map((p) => p.placeId);
-    const placeDetails = await prisma.place.findMany({
-      where: { id: { in: placeIds } },
-      select: { id: true, provinceId: true },
+    // Group views by province
+    const provinceViews = await prisma.post.groupBy({
+      by: ["placeId"],
+      _sum: { view: true },
+      where: { placeId: { not: null } },
     });
 
     // Fetch province details
-    const provinceIds = [...new Set(placeDetails.map((p) => p.provinceId))];
+    const provinceData = await prisma.place.findMany({
+      where: { id: { in: provinceViews.map((p) => p.placeId) } },
+      select: { id: true, provinceId: true },
+    });
+
     const provinces = await prisma.province.findMany({
-      where: { id: { in: provinceIds } },
+      where: { id: { in: provinceData.map((p) => p.provinceId) } },
       select: { id: true, name: true },
+    });
+
+    // Fetch 1 image per province
+    const provinceImages = await prisma.postImage.findMany({
+      where: { postId: { in: provinceViews.map((p) => p.placeId) } },
+      select: {
+        postId: true,
+        url: true,
+      },
+      orderBy: {
+        postId: "asc",
+      },
+      distinct: ["postId"], // เอารูปแรกของแต่ละโพสต์
     });
 
     // Aggregate views by province
     const provinceTotals = {};
     provinceViews.forEach((p) => {
-      const place = provinceData.find((post) => post.id === p.postId);
-      const provinceId = placeDetails.find((pl) => pl.id === place?.placeId)?.provinceId;
+      const provinceId = provinceData.find(
+        (pl) => pl.id === p.placeId
+      )?.provinceId;
       if (provinceId) {
-        provinceTotals[provinceId] = (provinceTotals[provinceId] || 0) + (p._sum.views || 0);
+        provinceTotals[provinceId] =
+          (provinceTotals[provinceId] || 0) + (p._sum.view || 0);
       }
     });
 
-    // Sort and get top 10 provinces
-    const topProvinces = Object.entries(provinceTotals)
-      .map(([id, totalViews]) => ({
+    // Sort provinces by views (desc)
+    const topProvinces = Object.keys(provinceTotals)
+      .map((id) => ({
         id: Number(id),
-        name: provinces.find((prov) => prov.id === Number(id))?.name || "Unknown",
-        totalViews,
+        name:
+          provinces.find((prov) => prov.id === Number(id))?.name || "Unknown",
+        totalViews: provinceTotals[id],
+        imageUrl:
+          provinceImages.find((img) => img.postId === Number(id))?.url || null, // เพิ่ม imageUrl
       }))
-      .sort((a, b) => b.totalViews - a.totalViews)
-      .slice(0, 10);
+      .sort((a, b) => b.totalViews - a.totalViews);
 
-    const topProvinceIds = topProvinces.map((p) => p.id);
-
-    // Fetch one image for each province
-    const provinceImages = await prisma.place.findMany({
-      where: { provinceId: { in: topProvinceIds } },
-      select: {
-        provinceId: true,
-        posts: {
-          select: {
-            images: { select: { url: true }, take: 1 }, // Get one image
-          },
-          take: 1, // Get one post
-        },
-      },
+    // Group views by district
+    const districtViews = await prisma.post.groupBy({
+      by: ["placeId"],
+      _sum: { view: true },
+      where: { placeId: { not: null } },
     });
 
-    // Map images to provinces
-    const finalTopProvinces = topProvinces.map((province) => {
-      const provinceImage = provinceImages.find((p) => p.provinceId === province.id);
-      return {
-        ...province,
-        image: provinceImage?.posts?.[0]?.images?.[0]?.url || null,
-      };
+    // Fetch district details
+    const districtData = await prisma.place.findMany({
+      where: { id: { in: districtViews.map((d) => d.placeId) } },
+      select: { id: true, districtId: true },
     });
 
-    res.json({ topProvinces: finalTopProvinces });
+    const districts = await prisma.district.findMany({
+      where: { id: { in: districtData.map((d) => d.districtId) } },
+      select: { id: true, name: true },
+    });
+
+    // Aggregate views by district
+    const districtTotals = {};
+    districtViews.forEach((d) => {
+      const districtId = districtData.find(
+        (pl) => pl.id === d.placeId
+      )?.districtId;
+      if (districtId) {
+        districtTotals[districtId] =
+          (districtTotals[districtId] || 0) + (d._sum.view || 0);
+      }
+    });
+
+    // Sort districts by views (desc)
+    const topDistricts = Object.keys(districtTotals)
+      .map((id) => ({
+        id: Number(id),
+        name:
+          districts.find((dist) => dist.id === Number(id))?.name || "Unknown",
+        totalViews: districtTotals[id],
+      }))
+      .sort((a, b) => b.totalViews - a.totalViews);
+
+    res.json({ topPlaces: topPlacesResult, topProvinces, topDistricts });
   } catch (error) {
     next(error);
   }
 };
-
 
 module.exports = trackViewController;
