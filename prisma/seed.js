@@ -1936,11 +1936,6 @@ async function seedDB() {
   await prisma.postImage.createMany({
     data: postImageData,
   });
-
-  await prisma.wishlist.createMany({
-    data: wishlistData,
-  });
-
 }
 
 seedDB();
