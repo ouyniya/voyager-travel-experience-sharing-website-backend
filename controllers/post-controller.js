@@ -153,6 +153,7 @@ postController.getAllPosts = async (req, res, next) => {
       district: post.place.district.name,
       category: post.place.category || "default", // <- ✅ Include this line
       image: post.images.length > 0 ? post.images[0].url : null,
+      view: post.view
     }));
 
     res.json({ message: "getAllPosts", posts: formattedPosts });
