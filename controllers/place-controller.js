@@ -65,4 +65,14 @@ placeController.deletePlace = async (req, res, next) => {
   }
 };
 
+placeController.getPlaces = async (req, res, next) => {
+  try {
+    const places = await prisma.place.findMany();
+    res.status(200).json({ places });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 module.exports = placeController;
