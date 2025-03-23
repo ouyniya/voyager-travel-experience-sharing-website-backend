@@ -212,6 +212,8 @@ wishlistController.deleteWishlist = async (req, res, next) => {
       return createError(404, `Wishlist ID ${wishlistId} not found.`);
     }
 
+    console.log(userId, wishlistId);
+
     // Fetch wishlists for the given user
     const wishlists = await prisma.wishlist.delete({
       where: { userId: +userId, id: +wishlistId },
@@ -219,6 +221,42 @@ wishlistController.deleteWishlist = async (req, res, next) => {
 
     res.json({
       message: `Wishlist ID ${wishlistId} deleted`,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+wishlistController.deleteWishlistByPostId = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const { postId } = req.params;
+
+    // Validate userId (must be a number)
+    if (!userId || isNaN(userId)) {
+      return createError(400, "Invalid userId. It must be a number.");
+    }
+    if (!postId || isNaN(postId)) {
+      return createError(400, "Invalid postId. It must be a number.");
+    }
+
+    // // Check if user exists
+    const wishlistsExists = await prisma.wishlist.findFirst({
+      where: { userId: +userId, postId: +postId },
+    });
+    if (!wishlistsExists) {
+      return createError(404, `Wishlist ID ${postId} not found.`);
+    }
+
+    console.log(userId, postId);
+
+    // Fetch wishlists for the given user
+    const wishlists = await prisma.wishlist.deleteMany({
+      where: { userId: +userId, postId: +postId },
+    });
+
+    res.json({
+      message: `Wishlist of post ID ${postId} deleted`,
     });
   } catch (error) {
     next(error);
