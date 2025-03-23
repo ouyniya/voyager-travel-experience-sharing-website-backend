@@ -277,7 +277,7 @@ trackViewController.getTrackViewsByPlace = async (req, res, next) => {
 };
 
 trackViewController.getTopProvinces = async (req, res, next) => {
-  console.log('*********')
+  // console.log("*********");     
   try {
     // Fetch total views for each place
     const placeViews = await prisma.post.groupBy({
@@ -286,7 +286,7 @@ trackViewController.getTopProvinces = async (req, res, next) => {
       where: { placeId: { not: null } },
     });
 
-    // Sort places by total views in descending order and limit to top 10
+    // Sort and limit to top 10 places
     const sortedTopPlaces = placeViews
       .sort((a, b) => (b._sum.view || 0) - (a._sum.view || 0))
       .slice(0, 10);
@@ -309,6 +309,14 @@ trackViewController.getTopProvinces = async (req, res, next) => {
       },
     });
 
+    // Fetch images for places
+    const placeImages = await prisma.postImage.findMany({
+      where: { postId: { in: placeIds } },
+      select: { postId: true, url: true },
+      orderBy: { postId: "asc" },
+      distinct: ["postId"],
+    });
+
     // Construct place results
     const topPlacesResult = sortedTopPlaces.map((p) => {
       const place = places.find((place) => place.id === p.placeId);
@@ -318,43 +326,19 @@ trackViewController.getTopProvinces = async (req, res, next) => {
         totalViews: p._sum.view || 0,
         district: place?.district?.name || "Unknown",
         province: place?.district?.province?.name || "Unknown",
+        imageUrl:
+          placeImages.find((img) => img.postId === p.placeId)?.url || null,
       };
     });
 
-    // Group views by province
-    const provinceViews = await prisma.post.groupBy({
-      by: ["placeId"],
-      _sum: { view: true },
-      where: { placeId: { not: null } },
-    });
-
-    // Fetch province details
+    // Fetch and aggregate views by province
     const provinceData = await prisma.place.findMany({
-      where: { id: { in: provinceViews.map((p) => p.placeId) } },
+      where: { id: { in: placeViews.map((p) => p.placeId) } },
       select: { id: true, provinceId: true },
     });
 
-    const provinces = await prisma.province.findMany({
-      where: { id: { in: provinceData.map((p) => p.provinceId) } },
-      select: { id: true, name: true },
-    });
-
-    // Fetch 1 image per province
-    const provinceImages = await prisma.postImage.findMany({
-      where: { postId: { in: provinceViews.map((p) => p.placeId) } },
-      select: {
-        postId: true,
-        url: true,
-      },
-      orderBy: {
-        postId: "asc",
-      },
-      distinct: ["postId"], // เอารูปแรกของแต่ละโพสต์
-    });
-
-    // Aggregate views by province
     const provinceTotals = {};
-    provinceViews.forEach((p) => {
+    placeViews.forEach((p) => {
       const provinceId = provinceData.find(
         (pl) => pl.id === p.placeId
       )?.provinceId;
@@ -364,7 +348,19 @@ trackViewController.getTopProvinces = async (req, res, next) => {
       }
     });
 
-    // Sort provinces by views (desc)
+    const provinces = await prisma.province.findMany({
+      where: { id: { in: Object.keys(provinceTotals).map(Number) } },
+      select: { id: true, name: true },
+    });
+
+    // Fetch images for provinces
+    const provinceImages = await prisma.postImage.findMany({
+      where: { postId: { in: Object.keys(provinceTotals).map(Number) } },
+      select: { postId: true, url: true },
+      orderBy: { postId: "asc" },
+      distinct: ["postId"],
+    });
+
     const topProvinces = Object.keys(provinceTotals)
       .map((id) => ({
         id: Number(id),
@@ -372,47 +368,48 @@ trackViewController.getTopProvinces = async (req, res, next) => {
           provinces.find((prov) => prov.id === Number(id))?.name || "Unknown",
         totalViews: provinceTotals[id],
         imageUrl:
-          provinceImages.find((img) => img.postId === Number(id))?.url || null, // เพิ่ม imageUrl
+          provinceImages.find((img) => img.postId === Number(id))?.url || null,
       }))
       .sort((a, b) => b.totalViews - a.totalViews);
 
-    // Group views by district
-    const districtViews = await prisma.post.groupBy({
-      by: ["placeId"],
-      _sum: { view: true },
-      where: { placeId: { not: null } },
-    });
-
-    // Fetch district details
+    // Fetch and aggregate views by district
     const districtData = await prisma.place.findMany({
-      where: { id: { in: districtViews.map((d) => d.placeId) } },
+      where: { id: { in: placeViews.map((p) => p.placeId) } },
       select: { id: true, districtId: true },
     });
 
-    const districts = await prisma.district.findMany({
-      where: { id: { in: districtData.map((d) => d.districtId) } },
-      select: { id: true, name: true },
-    });
-
-    // Aggregate views by district
     const districtTotals = {};
-    districtViews.forEach((d) => {
+    placeViews.forEach((p) => {
       const districtId = districtData.find(
-        (pl) => pl.id === d.placeId
+        (pl) => pl.id === p.placeId
       )?.districtId;
       if (districtId) {
         districtTotals[districtId] =
-          (districtTotals[districtId] || 0) + (d._sum.view || 0);
+          (districtTotals[districtId] || 0) + (p._sum.view || 0);
       }
     });
 
-    // Sort districts by views (desc)
+    const districts = await prisma.district.findMany({
+      where: { id: { in: Object.keys(districtTotals).map(Number) } },
+      select: { id: true, name: true },
+    });
+
+    // Fetch images for districts
+    const districtImages = await prisma.postImage.findMany({
+      where: { postId: { in: Object.keys(districtTotals).map(Number) } },
+      select: { postId: true, url: true },
+      orderBy: { postId: "asc" },
+      distinct: ["postId"],
+    });
+
     const topDistricts = Object.keys(districtTotals)
       .map((id) => ({
         id: Number(id),
         name:
           districts.find((dist) => dist.id === Number(id))?.name || "Unknown",
         totalViews: districtTotals[id],
+        imageUrl:
+          districtImages.find((img) => img.postId === Number(id))?.url || null,
       }))
       .sort((a, b) => b.totalViews - a.totalViews);
 

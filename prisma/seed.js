@@ -45,7 +45,7 @@ const postData = [
     title: "Stunning views at Wat Phra Kaew (Temple of the Emerald Buddha).",
     content: "My adventure to Wat Phra Kaew (Temple of the Emerald Buddha) was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 316,
-    view: 6390,
+    view: 15021,
   },
   {
     id: 2,
@@ -135,7 +135,7 @@ const postData = [
     title: "Stunning views at Pattaya Beach.",
     content: "During my visit to Pattaya Beach, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1301,
-    view: 4005,
+    view: 10001,
   },
   {
     id: 12,
@@ -351,7 +351,7 @@ const postData = [
     title: "My adventurous trip to Lam Pao Dam.",
     content: "Lam Pao Dam offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 1049,
-    view: 4104,
+    view: 12450,
   },
   {
     id: 36,
@@ -450,7 +450,7 @@ const postData = [
     title: "Discovering the charm of Wat Rong Khun (White Temple).",
     content: "My adventure to Wat Rong Khun (White Temple) was remarkable! The unique scenery and vibrant atmosphere made this trip unforgettable. The locals were friendly, and I learned many interesting things. A must-see destination for travelers.",
     budget: 488,
-    view: 4242,
+    view: 11564,
   },
   {
     id: 47,
@@ -549,7 +549,7 @@ const postData = [
     title: "A peaceful visit to Erawan National Park.",
     content: "During my visit to Erawan National Park, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 1061,
-    view: 2495,
+    view: 10002,
   },
   {
     id: 58,
@@ -630,7 +630,7 @@ const postData = [
     title: "Discovering the charm of Similan Islands National Park.",
     content: "Similan Islands National Park offered an incredibly relaxing experience with its stunning landscapes and welcoming locals. I loved the tranquility and the cultural insights I gained during my stay. Perfect for nature lovers!",
     budget: 557,
-    view: 6791,
+    view: 13502,
   },
   {
     id: 67,
@@ -639,7 +639,7 @@ const postData = [
     title: "My adventurous trip to Phuket Old Town.",
     content: "During my visit to Phuket Old Town, I enjoyed breathtaking views and a peaceful atmosphere. It was the perfect escape from daily life. The local people were welcoming, and the site provided excellent photo opportunities. I highly recommend visiting!",
     budget: 996,
-    view: 1202,
+    view: 10655,
   },
   {
     id: 68,
@@ -657,7 +657,7 @@ const postData = [
     title: "My adventurous trip to Ko Surin National Park.",
     content: "Visiting Ko Surin National Park was an extraordinary experience. The historical significance and beautiful architecture were truly impressive. Everyone there was kind, making the experience very special.",
     budget: 459,
-    view: 9004,
+    view: 14520,
   },
   {
     id: 70,
@@ -2039,11 +2039,11 @@ const postImageData = [
   { postId: 84, url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/89/fb/36/caption.jpg?w=2000&h=-1&s=1" },
   { postId: 85, url: "https://ak-d.tripcdn.com/images/1mk3u2234c2mi3ots4C26_C_1200_800_Q70.jpg?proc=source%2ftrip&proc=source%2ftrip" },
   { postId: 86, url: "https://img.wongnai.com/p/1920x0/2023/01/07/25d994d81885413e959ec5948a317793.jpg" },
-  { postId: 87, url: "https://img.kapook.com/content_upload2/images/moodeng01.jpg" },
-  { postId: 87, url: "https://cms.dmpcdn.com/news/2024/09/11/8a63f6f0-5058-11ee-abb5-19dfd13d6b64_webp_original.jpg" },
-  { postId: 87, url: "https://mpics.mgronline.com/pics/Images/567000009588601.JPEG" },
-  { postId: 87, url: "https://f.ptcdn.info/093/083/000/siqeavtbvqcdXLst4oY-o.jpg" },
-  { postId: 87, url: "https://thethaiger.com/th/wp-content/uploads/2024/09/pygmy-hippo-chonburi-kkopenzoo.jpg" },
+  { postId: 87, url: "https://res.cloudinary.com/drcejgsvh/image/upload/v1742688075/pexels-photo-17069254_wbfvcw.jpg" },
+  { postId: 87, url: "https://images.pexels.com/photos/18441436/pexels-photo-18441436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+  { postId: 87, url: "https://images.pexels.com/photos/12000868/pexels-photo-12000868.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+  { postId: 87, url: "https://images.pexels.com/photos/29973754/pexels-photo-29973754.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+  { postId: 87, url: "https://images.pexels.com/photos/19155065/pexels-photo-19155065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 
 ];
 
