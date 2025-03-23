@@ -123,6 +123,7 @@ authController.currentUser = async (req, res, next) => {
         email: true,
         role: true,
         profileImage: true,
+        isGoogleUser: true,
       },
     });
 

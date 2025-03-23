@@ -45,7 +45,7 @@ const authenticate = async (req, res, next) => {
       return next();
     }
 
-    return next(createError(401, "Unauthorized: No valid authentication method"));
+    return next(createError(401, "Unauthorized. Please login before using this feature."));
   } catch (error) {
     console.error("Authentication error:", error);
     next(error);

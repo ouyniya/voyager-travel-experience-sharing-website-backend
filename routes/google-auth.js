@@ -15,7 +15,8 @@ router.get("/login/success", (req, res, next) => {
         googleId: req.user.googleId,
         username: req.user.username,
         email: req.user.email,
-        profileImage: req.user.profileImage // Handle profile image
+        profileImage: req.user.profileImage,
+        isGoogleUser: req.user.isGoogleUser 
       },
     });
   }
