@@ -19,26 +19,32 @@ const userData = [
     username: "andy",
     email: "andy@test.com",
     password: hashedPassword,
+    profileImage:
+      "https://images.pexels.com/photos/709143/pexels-photo-709143.jpeg",
   },
   {
     username: "bob",
     email: "bob@test.com",
     password: hashedPassword,
+    profileImage: "https://images.pexels.com/photos/3930029/pexels-photo-3930029.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     username: "canny",
     email: "canny@test.com",
     password: hashedPassword,
+    profileImage: "https://images.pexels.com/photos/547557/pexels-photo-547557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     username: "danny",
     email: "danny@test.com",
     password: hashedPassword,
+    profileImage: "https://images.pexels.com/photos/1761282/pexels-photo-1761282.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     username: "john_doe",
     email: "john.doe123@example.com",
     password: hashedPassword,
+    profileImage: "https://images.pexels.com/photos/925263/pexels-photo-925263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     username: "sarah_lee",
@@ -54,6 +60,7 @@ const userData = [
     username: "emily_smith",
     email: "emily.smith456@example.com",
     password: hashedPassword,
+    profileImage: "https://images.pexels.com/photos/2901913/pexels-photo-2901913.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     username: "daniel_brown",
@@ -69,6 +76,7 @@ const userData = [
     username: "kevin_martin",
     email: "kevin.martin303@example.com",
     password: hashedPassword,
+    profileImage: "https://images.pexels.com/photos/2923156/pexels-photo-2923156.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     username: "olivia_white",
@@ -79,11 +87,14 @@ const userData = [
     username: "charlie_green",
     email: "charlie.green505@example.com",
     password: hashedPassword,
+    profileImage: "https://images.pexels.com/photos/1136575/pexels-photo-1136575.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     username: "anna_black",
     email: "anna.black606@example.com",
     password: hashedPassword,
+    profileImage:
+      "https://images.pexels.com/photos/1250643/pexels-photo-1250643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
 ];
 

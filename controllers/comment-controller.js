@@ -18,6 +18,9 @@ commentController.addComment = async (req, res, next) => {
         content,
         parentId: Number(parentId) || null,
       },
+      include: {
+        user: true
+      }
     });
 
     res.json(comment);
@@ -156,7 +159,7 @@ commentController.getPostComments = async (req, res, next) => {
     const comments = await prisma.comment.findMany({
       where: { postId: Number(postId), parentId: null },
       include: {
-        user: { select: { username: true } },
+        user: { select: { username: true, profileImage: true, id: true, role: true } },
         children: {
           include: { user: { select: { username: true } } },
         },
