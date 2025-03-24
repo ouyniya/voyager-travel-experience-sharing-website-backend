@@ -14,8 +14,13 @@ router.post(
   authController.register
 );
 
+router.post("/login-less-secure", validationZod(loginSchema), authController.loginLessSecure);
 router.post("/login", validationZod(loginSchema), authController.login);
-
 router.get("/current-user", authenticate, authController.currentUser);
+
+// OTP routes
+router.post('/verify-otp', authController.verifyOTP);
+router.post('/resend-otp', authController.resendOTP);
+
 
 module.exports = router;
