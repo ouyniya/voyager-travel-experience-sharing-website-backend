@@ -40,6 +40,10 @@ model User {
   comments     Comment[]
   wishlists    Wishlist[]
 
+  otpHash     String?
+  otpExpiry   DateTime?
+  otpVerified Boolean   @default(false)
+
   isGoogleUser Boolean @default(false) // Tracks if the user logged in with Google
 }
 
@@ -59,20 +63,19 @@ model District {
 }
 
 model Place {
-  id          Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
-  description String?   @db.Text
+  description String?  @db.Text
   latitude    Float?
   longitude   Float?
-  province    Province  @relation(fields: [provinceId], references: [id], onDelete: Cascade)
+  province    Province @relation(fields: [provinceId], references: [id], onDelete: Cascade)
   provinceId  Int
-  district    District  @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  district    District @relation(fields: [districtId], references: [id], onDelete: Cascade)
   districtId  Int
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime @default(now())
   posts       Post[]
   category    String?
 }
-
 
 model Post {
   id        Int         @id @default(autoincrement())
