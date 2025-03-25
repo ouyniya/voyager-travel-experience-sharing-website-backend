@@ -35,14 +35,14 @@ const userData = [
     profileImage: "https://images.pexels.com/photos/547557/pexels-photo-547557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
-    username: "danny",
-    email: "danny@test.com",
+    username: "voyager",
+    email: "voyager.cc19@gmail.com",
     password: hashedPassword,
     profileImage: "https://images.pexels.com/photos/1761282/pexels-photo-1761282.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
-    username: "voyager",
-    email: "voyager.cc19@gmail.com",
+    username: "danny",
+    email: "danny@test.com",
     password: hashedPassword,
     profileImage: "https://images.pexels.com/photos/1761282/pexels-photo-1761282.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
