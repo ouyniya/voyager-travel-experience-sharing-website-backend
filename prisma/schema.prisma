@@ -50,6 +50,7 @@ model User {
 model Province {
   id        Int        @id @default(autoincrement())
   name      String     @unique
+  count     Int        @default(0)
   districts District[]
   places    Place[]
 }
@@ -132,3 +133,13 @@ model View {
 
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
+
+model AiRequest {
+  id                 Int      @id @default(autoincrement())
+  period             Int
+  transportation     String
+  numberOfTravellers Int
+  budget             Float
+  moodAndTone        String
+  createdAt          DateTime @default(now())
+}  
